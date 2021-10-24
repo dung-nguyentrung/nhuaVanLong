@@ -16,9 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->string('name_vi');
-            $table->string('name_en');
-            $table->string('name_jp');
+            $table->string('name');
             $table->string('slug')->unique();
             $table->decimal('weight')->default(0);
             $table->string('color');
@@ -26,12 +24,8 @@ class CreateProductsTable extends Migration
             $table->string('cycle');
             $table->integer('quantity')->default(0);
             $table->decimal('price', 18, 2);
-            $table->text('short_description_vi');
-            $table->text('short_description_en');
-            $table->text('short_description_jp');
-            $table->longText('description_vi');
-            $table->longText('description_en');
-            $table->longText('description_jp');
+            $table->text('short_description');
+            $table->longText('description');
             $table->unsignedBigInteger('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('updated_by')->nullable()->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('deleted_by')->nullable()->references('id')->on('users')->onDelete('cascade');

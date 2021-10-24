@@ -18,12 +18,12 @@ class CreateOrdersTable extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('address');
-            $table->string('ward');
-            $table->string('district');
-            $table->string('province');
+            $table->foreignId('province_id')->constrained();
+            $table->foreignId('district_id')->constrained();
+            $table->foreignId('ward_id')->constrained();
             $table->decimal('subtotal', 18,2);
             $table->decimal('tax', 18,2);
-            $table->decimal('shipping', 18,2);
+            $table->decimal('shipping', 18,2)->default(0);
             $table->decimal('total', 18,2);
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();

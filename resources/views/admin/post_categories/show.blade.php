@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', $postCategory->name_vi)
+@section('title', $postCategory->name)
 
 @section('content')
 <div class="container-fluid">
@@ -8,7 +8,7 @@
         <div class="col-lg-12">
             <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                 <div>
-                    <h4 class="mb-3">{{ $postCategory->name_vi }}</h4>
+                    <h4 class="mb-3">{{ $postCategory->name }}</h4>
                 </div>
                 <div>
                     @can('post_category_access')
@@ -26,16 +26,8 @@
                         <th>{{ $postCategory->id }}</th>
                     </tr>
                     <tr>
-                        <th>Tên danh mục sản phẩm (VI)</th>
-                        <th>{{ $postCategory->name_vi }}</th>
-                    </tr>
-                    <tr>
-                        <th>Tên danh mục sản phẩm (EN)</th>
-                        <th>{{ $postCategory->name_en }}</th>
-                    </tr>
-                    <tr>
-                        <th>Tên danh mục sản phẩm (JP)</th>
-                        <th>{{ $postCategory->name_jp }}</th>
+                        <th>Tên danh mục sản phẩm</th>
+                        <th>{{ $postCategory->name }}</th>
                     </tr>
                 </tbody>
             </table>

@@ -1,7 +1,4 @@
 @extends('admin.layouts.app')
-@php
-    $name = 'name_'.config('app.locale');
-@endphp
 @push('styles')
 <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 @endpush
@@ -52,9 +49,9 @@
                         </td>
                         <td>{{ $loop->iteration }}</td>
                         <td>
-                            <img src="{{ $item->getFirstMediaUrl('categories') }}" width="200" alt="{{ $item->$name }}">
+                            <img src="{{ $item->getFirstMediaUrl('categories') }}" width="200" alt="{{ $item->name }}">
                         </td>
-                        <td>{{ $item->$name }}</td>
+                        <td>{{ $item->name }}</td>
                         <td>
                             <div class="d-flex align-items-center list-action">
                                 @can('category_show')

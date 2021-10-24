@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- <div class="header-bottom sticky-content fix-top sticky-header">
+<div class="header-bottom sticky-content fix-top sticky-header">
     <div class="container">
         <div class="inner-wrap">
             <div class="header-left flex-1">
@@ -2693,5 +2693,5 @@
         </div>
     </div>
     <!-- End of Container -->
-</main> --}}
+</main>
 @endsection

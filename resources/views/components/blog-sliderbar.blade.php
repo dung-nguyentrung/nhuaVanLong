@@ -1,6 +1,3 @@
-@php
-    $name = 'name_'.config('app.locale')
-@endphp
 <aside class="sidebar right-sidebar blog-sidebar sidebar-fixed sticky-sidebar-wrapper">                    
     <div class="sidebar-content">
         <div class="sticky-sidebar">
@@ -20,7 +17,7 @@
                 <ul class="widget-body filter-items search-ul">
                     <li><a href="/blogs">Tất cả</a></li>
                     @foreach ($postCategories as $postCategory)
-                    <li><a href="{{ route('posts.category', ['postCategory' => $postCategory->slug ]) }}">{{ $postCategory->$name }}</a></li>                                        
+                    <li><a href="{{ route('posts.category', ['postCategory' => $postCategory->slug ]) }}">{{ $postCategory->name }}</a></li>                                        
                     @endforeach
                 </ul>
             </div>
@@ -45,7 +42,7 @@
                                                 <span class="post-date">{{ $post->created_at->format('M, d Y') }}</span>
                                             </div>
                                             <h4 class="post-title">
-                                                <a href="{{ route('posts.detail', ['post' => $post->slug]) }}">{{ $post->$name }}</a>
+                                                <a href="{{ route('posts.detail', ['post' => $post->slug]) }}">{{ $post->name }}</a>
                                             </h4>
                                         </div>
                                     </div>                                        
@@ -60,7 +57,7 @@
                 <h3 class="widget-title bb-no">Chủ đề</h3>
                 <div class="widget-body tags">
                     @foreach ($tags as $tag)
-                    <a href="{{ route('posts.tag', ['tag' => $tag->slug ]) }}" class="tag">{{ $tag->$name }}</a>                        
+                    <a href="{{ route('posts.tag', ['tag' => $tag->slug ]) }}" class="tag">{{ $tag->name }}</a>                        
                     @endforeach
                 </div>
             </div>

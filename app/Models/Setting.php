@@ -13,15 +13,11 @@ class Setting extends Model
     protected $table = 'settings';
 
     protected $fillable = [
-        'description_vi',
-        'description_en',
-        'description_jp',
+        'description',
         'email',
         'phone',
         'fax',
-        'address_vi',
-        'address_en',
-        'address_jp',
+        'address',
         'open_time',
     ];
 

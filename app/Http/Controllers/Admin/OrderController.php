@@ -31,13 +31,13 @@ class OrderController extends Controller
      */
     public function create()
     {   $province = Province::all();
-        $products = Product::select('id', 'name_vi')->with('media')->limit(12)->get();
+        $products = Product::select('id', 'name')->with('media')->limit(12)->get();
         return view('admin.orders.create', compact('products', 'province'));
     }
 
     public function search () {
         $output = '';
-        $products = Product::where('name_vi','LIKE','%'. request()->search.'%')->limit(12)->get();
+        $products = Product::where('name','LIKE','%'. request()->search.'%')->limit(12)->get();
         if ($products) {
             foreach ($products as $item) {
                 $output .= '<div class="col-md-3">

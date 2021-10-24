@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderRequest;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\Receipt;
+use App\Services\OrderService;
 use Brian2694\Toastr\Facades\Toastr;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use HoangPhi\VietnamMap\Models\District;
 use HoangPhi\VietnamMap\Models\Province;
 use HoangPhi\VietnamMap\Models\Ward;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -18,7 +24,16 @@ class CartController extends Controller
         return view('frontend.shop.cart', compact('random_products'));
     }
 
-    public function checkout() {      
+    public function checkout() {  
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }   
+
+        if (Cart::instance('cart')->count() <= 0) {
+            Toastr::error('Giỏ hàng của bạn đang trống', 'Thông báo');
+            return redirect()->route('shop');
+        }
+
         $provinces = Province::all();
         return view('frontend.shop.checkout', compact('provinces'));
     }
@@ -38,7 +53,7 @@ class CartController extends Controller
     public function addToWishlist(Request $request) {
         if (!empty($request->id)) {
             $product = Product::findOrFail($request->id);
-            Cart::instance('wishlist')->add($product->id, $product->name_vi, 1, $product->price)->associate(Product::class);
+            Cart::instance('wishlist')->add($product->id, $product->name, 1, $product->price)->associate(Product::class);
         }    
         return response()->json();
     }
@@ -46,7 +61,7 @@ class CartController extends Controller
     public function addToCartAjax(Request $request) {
         if (!empty($request->id)) {
             $product = Product::findOrFail($request->id);
-            Cart::instance('cart')->add($product->id, $product->name_vi, 1, $product->price)->associate(Product::class);
+            Cart::instance('cart')->add($product->id, $product->name, 1, $product->price)->associate(Product::class);
         }
 
         return response()->json();
@@ -74,5 +89,17 @@ class CartController extends Controller
             Toastr::erorr('Số lượng sản phẩm không hợp lệ !', 'Thông báo');
 
         return back();
+    }
+
+    public function order(OrderRequest $request, OrderService $service) {
+
+        $order = $service->storeNewOrder($request->validated(), $request->products);        
+
+        Toastr::success('Đặt hàng thành công', 'Thông báo');
+        return redirect()->route('thankyou');
+    }
+
+    public function thankyou() {
+        return view('frontend.shop.thankyou');
     }
 }

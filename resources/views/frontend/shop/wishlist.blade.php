@@ -1,7 +1,4 @@
 @extends('layouts.base')
-@php
-    $name = 'name_'.config('app.locale')
-@endphp
 @section('content')
 <!-- Start of Main -->
 <main class="main cart">
@@ -46,12 +43,12 @@
                                 </td>
                                 <td class="product-name">
                                     <a href="{{ route('products.detail', ['product' => $item->model->slug]) }}">
-                                        {{ $item->model->$name }}
+                                        {{ $item->model->name }}
                                     </a>
                                 </td>
                                 <td class="product-price"><span class="amount">{{ $item->model->price }}</span></td>
                                 <td class="product-subtotal">
-                                    <a href="#" class="btn btn-dark ">Thêm giỏ hàng</a>
+                                    <a href="#" data-id="{{ $item->model->id }}" class="addToCart btn btn-dark ">Thêm giỏ hàng</a>
                                 </td>
                             </tr>                                
                             @endforeach
@@ -89,13 +86,13 @@
                                                     <div class="product product-widget">
                                                         <figure class="product-media">
                                                             <a href="{{ route('products.detail', ['product' => $product->slug]) }}">
-                                                                <img src="{{ $product->getFirstMediaUrl('products') }}" alt="{{ $product->$name }}"
+                                                                <img src="{{ $product->getFirstMediaUrl('products') }}" alt="{{ $product->name }}"
                                                                     width="100" height="113" />
                                                             </a>
                                                         </figure>
                                                         <div class="product-details">
                                                             <h4 class="product-name">
-                                                                <a href="{{ route('products.detail', ['product' => $product->slug]) }}">{{ $product->$name }}</a>
+                                                                <a href="{{ route('products.detail', ['product' => $product->slug]) }}">{{ $product->name }}</a>
                                                             </h4>
                                                         </div>
                                                     </div>
@@ -116,3 +113,31 @@
 </main>
 <!-- End of Main -->
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            $('.addToCart').click(function (e) { 
+                e.preventDefault();
+                
+                let id = $(this).attr('data-id');
+
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('products.ajax.cart') }}",
+                    data: {
+                        id: id,
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        toastr.success('Thêm sản phẩm vào giỏ hàng thành công', 'Thông báo');
+                    },
+                    error: function (error) { 
+                        toastr.error(error.response.error, 'Lỗi');
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

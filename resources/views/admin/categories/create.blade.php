@@ -20,27 +20,12 @@
                         @csrf
                         <div class="row">         
                             <div class="col-md-12">
-                                @foreach (config('app.available_locales') as $item)
                                 <div class="form-group">
-                                    <label>Tên danh mục sản phẩm ({{ strToUpper($item) }})</label>
-                                    <input type="text" name="name_{{ $item }}" class="form-control" placeholder="Nhập tên danh mục sản phẩm {{ $item }}">
+                                    <label>Tên danh mục sản phẩm</label>
+                                    <input type="text" name="name" class="form-control" placeholder="Nhập tên danh mục sản phẩm">
                                     <div class="help-block with-errors"></div>
-                                </div>                                                          
-                                @endforeach
-                            </div>             
-                            <div class="col-lg-4">
-                                <label>Hình ảnh</label><br>
-                                <input type="file" name="image" required onchange="loadPreview(this);">
-                            </div>
-                            <div class="col-lg-8">
-                                <img id="preview_img" src="{{ asset('admin/assets/images/no-image.png') }}" width="200" alt="Temporary image">
-                            </div>        
-                            @foreach (config('app.available_locales') as $item)
-                                <div class="col-lg-12 form-group">
-                                    <label>Mô tả danh mục sản phẩm ({{ strToUpper($item) }})</label>
-                                    <textarea name="description_{{ $item }}" class="form-control" rows="4"></textarea>
-                                </div>
-                            @endforeach
+                                </div>       
+                            </div>   
                         </div>                            
                         <button type="submit" class="btn btn-primary mr-2">Lưu lại</button>
                     </form>

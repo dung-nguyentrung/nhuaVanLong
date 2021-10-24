@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', $post->name_vi)
+@section('title', $post->name)
 
 @section('content')
 <div class="container-fluid">
@@ -8,7 +8,7 @@
         <div class="col-lg-12">
             <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                 <div>
-                    <h4 class="mb-3">{{ $post->name_vi }}</h4>
+                    <h4 class="mb-3">{{ $post->name }}</h4>
                 </div>
                 <div>
                     @can('post_access')
@@ -27,19 +27,11 @@
                     </tr>
                     <tr>
                         <th>Danh mục</th>
-                        <th>{{ $post->postCategory->name_vi }}</th>
+                        <th>{{ $post->postCategory->name }}</th>
                     </tr>
                     <tr>
-                        <th>Tên sản phẩm (VI)</th>
-                        <th>{{ $post->name_vi }}</th>
-                    </tr>
-                    <tr>
-                        <th>Tên sản phẩm (EN)</th>
-                        <th>{{ $post->name_en }}</th>
-                    </tr>
-                    <tr>
-                        <th>Tên sản phẩm (JP)</th>
-                        <th>{{ $post->name_jp }}</th>
+                        <th>Tên sản phẩm</th>
+                        <th>{{ $post->name }}</th>
                     </tr>
                     <tr>
                         <th>Lượt xem</th>
@@ -47,26 +39,16 @@
                     </tr> 
                     <tr>
                         <th>Hình ảnh</th>
-                        <th><img src="{{ $post->getFirstMediaUrl('posts') }}" width="200" alt="{{ $post->name_vi }}"></th>
+                        <th><img src="{{ $post->getFirstMediaUrl('posts') }}" width="200" alt="{{ $post->name }}"></th>
                     </tr>
-                    @foreach (config('app.available_locales') as $item)
-                    @php
-                        $short = 'short_description_'.$item;
-                    @endphp
                         <tr>
-                            <th>Mô tả sản phẩm ({{ strToUpper($item) }})</th>
-                            <th>{{ $post->$short }}</th>
+                            <th>Mô tả sản phẩm</th>
+                            <th>{{ $post->short_description }}</th>
                         </tr>
-                    @endforeach
-                    @foreach (config('app.available_locales') as $item)
-                    @php
-                        $desc = 'description_'.$item;
-                    @endphp
                         <tr>
-                            <th>Chi tiết sản phẩm ({{ strToUpper($item) }})</th>
-                            <th>{!! $post->$desc !!}</th>
+                            <th>Chi tiết sản phẩm</th>
+                            <th>{!! $post->description !!}</th>
                         </tr>
-                    @endforeach
                 </tbody>
             </table>
         </div>

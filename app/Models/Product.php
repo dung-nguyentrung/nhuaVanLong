@@ -6,6 +6,7 @@ use App\Casts\MoneyCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
@@ -21,12 +22,12 @@ class Product extends Model implements HasMedia
 
     protected $fillable = [
         'category_id',
-        'name_vi', 'name_en','name_jp',
+        'name',
         'slug', 'weight', 'color',
         'capacity', 'cycle', 'quantity', 'price',
         'image', 'drawing',
-        'short_description_vi', 'short_description_en', 'short_description_jp',
-        'description_vi', 'description_en', 'description_jp',
+        'short_description',
+        'description',
         'created_by', 'updated_by', 'deleted_by',
         'created_at', 'updated_at', 'deleted_at'
     ];
@@ -42,9 +43,7 @@ class Product extends Model implements HasMedia
     public function scopeSearchProduct($query, $keyword, $category) {
         return $query->when($category, function($query) use ($category) {
             return $query->where('category_id', $category);
-        })->where('name_vi', 'LIKE', '%'.$keyword.'%')
-        ->orWhere('name_en', 'LIKE', '%'.$keyword.'%')
-        ->orWhere('name_jp', 'LIKE', '%'.$keyword.'%');
+        })->where('name', 'LIKE', '%'.$keyword.'%');
     }
 
     public function scopeSortByCategory($query, $category) {
@@ -56,11 +55,11 @@ class Product extends Model implements HasMedia
     }
 
     public function scopeGetRandomProduct($query) {
-        return $query->inRandomOrder()->limit(3);
+        return $query->inRandomOrder()->limit(5);
     }
 
-    public function setNameViAttribute($name) {
-        $this->attributes['name_vi'] = $name;
+    public function setNameAttribute($name) {
+        $this->attributes['name'] = $name;
         $this->attributes['slug'] = Str::slug($name);
     }
 
@@ -106,6 +105,16 @@ class Product extends Model implements HasMedia
                 ->usingFileName($this->slug)
                 ->toMediaCollection('product_drawing');
         }
+    }
+
+    /**
+     * Get all of the orderItems for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orderItems(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
     }
 
     public function registerMediaConversions(Media $media = null): void

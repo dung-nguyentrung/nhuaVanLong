@@ -1,7 +1,5 @@
 @extends('admin.layouts.app')
-@php
-    $name = 'name_'.config('app.locale');
-@endphp
+
 @push('styles')
 <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 @endpush
@@ -38,9 +36,6 @@
                     </tr>
                 </thead>                
                 <tbody class="ligth-body">
-                    @php
-                        $name = 'name_'.config('app.locale');
-                    @endphp
                     @foreach ($posts as $item)
                     <tr>
                         <td>
@@ -52,14 +47,14 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>
                             <div class="d-flex align-items-center">
-                                <img src="{{ $item->getFirstMediaUrl('posts') }}" class="img-fluid rounded avatar-50 mr-3" alt="{{ $item->$name }}">
+                                <img src="{{ $item->getFirstMediaUrl('posts') }}" class="img-fluid rounded avatar-50 mr-3" alt="{{ $item->name }}">
                                 <div>
-                                    {{ $item->$name }}                                
+                                    {{ $item->name }}                                
                                 </div>
                             </div>
                         </td>
                         <td>{{ $item->view }} <i class="fa fa-eye"></i></td>
-                        <td>{{ $item->postCategory->$name }}</td>
+                        <td>{{ $item->postCategory->name }}</td>
                         <td>
                             <div class="d-flex align-items-center list-action">
                                 @can('post_restore')

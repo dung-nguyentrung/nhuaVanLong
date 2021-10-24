@@ -6,22 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-
-class Category extends Model implements HasMedia
+class Category extends Model
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory;
 
     protected $table = 'categories';
 
     protected $fillable = [
-        'name_vi', 
-        'name_en', 
-        'name_jp', 
-        'description_vi', 
-        'description_en', 
-        'description_jp', 
+        'name',
         'slug',
         'created_at',
         'updated_at',
@@ -32,8 +24,8 @@ class Category extends Model implements HasMedia
         'updated_at'
     ];
 
-    public function setNameViAttribute($name) {
-        $this->attributes['name_vi'] = $name;
+    public function setNameAttribute($name) {
+        $this->attributes['name'] = $name;
         $this->attributes['slug'] = Str::slug($name);
     }
 

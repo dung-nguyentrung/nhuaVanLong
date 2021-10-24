@@ -34,17 +34,7 @@ class StoreProductRequest extends FormRequest
                 'required',
                 'exists:categories,id'
             ],
-            'name_vi' => [
-                'required',
-                'string',
-                'unique:products'
-            ],
-            'name_en' => [
-                'required',
-                'string',
-                'unique:products'
-            ],
-            'name_jp' => [
+            'name' => [
                 'required',
                 'string',
                 'unique:products'
@@ -71,27 +61,11 @@ class StoreProductRequest extends FormRequest
                 'required',
                 'numeric'
             ],
-            'short_description_vi' => [
+            'short_description' => [
                 'required',
                 'string'
             ],
-            'short_description_en' => [
-                'required',
-                'string'
-            ],
-            'short_description_jp' => [
-                'required',
-                'string'
-            ],
-            'description_vi' => [
-                'required',
-                'string'
-            ],
-            'description_en' => [
-                'required',
-                'string'
-            ],
-            'description_jp' => [
+            'description' => [
                 'required',
                 'string'
             ],
@@ -101,9 +75,7 @@ class StoreProductRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name_vi' => 'Tên sản phẩm (vi)',
-            'name_en' => 'Tên sản phẩm (en)',
-            'name_jp' => 'Tên sản phẩm (jp)',
+            'name' => 'Tên sản phẩm',
             'category_id' => 'Danh mục',
             'weight' => 'Trọng lượng',
             'color' => 'Màu sắc',
@@ -111,12 +83,8 @@ class StoreProductRequest extends FormRequest
             'cycle' => 'Chu kỳ sản xuất',
             'quantity' => 'Số lượng',
             'price' => 'Giá',
-            'short_description_vi' => 'Mô tả sản phẩm (vi)',
-            'short_description_en' => 'Mô tả sản phẩm (en)',
-            'short_description_jp' => 'Mô tả sản phẩm (jp)',
-            'description_vi' => 'Chi tiết sản phẩm (vi)',
-            'description_en' => 'Chi tiết sản phẩm (en)',
-            'description_jp' => 'Chi tiết sản phẩm (jp)',
+            'short_description' => 'Mô tả sản phẩm',
+            'description' => 'Chi tiết sản phẩm',
             'category_id'     => 'Danh mục sản phẩm'
         ];
     }

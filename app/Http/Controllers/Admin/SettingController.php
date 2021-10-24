@@ -33,7 +33,7 @@ class SettingController extends Controller
     {
         Setting::first() 
             ? Setting::first()->update($request->validated()) 
-            : Setting::create($request->all());
+            : Setting::create($request->validated());
 
         Toastr::success('Cập nhật thông tin website thành công !', 'Thông báo');
         return back();

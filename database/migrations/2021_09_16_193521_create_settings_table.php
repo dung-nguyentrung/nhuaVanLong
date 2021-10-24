@@ -15,15 +15,11 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('description_vi');
-            $table->string('description_en')->nullable();
-            $table->string('description_jp')->nullable();
+            $table->string('description');
             $table->string('email');
             $table->string('phone');
             $table->string('fax');
-            $table->string('address_vi')->nullable();
-            $table->string('address_en')->nullable();
-            $table->string('address_jp')->nullable();
+            $table->string('address')->nullable();
             $table->string('open_time');
             $table->timestamps();
         });

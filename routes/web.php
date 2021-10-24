@@ -6,7 +6,8 @@ use App\Http\Controllers\Frontend\{
     ContactController,
     HomeController,
     PolicyController,
-    ProductController
+    ProductController,
+    UserController
 };
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -44,9 +45,11 @@ Route::post('cart/update', [CartController::class, 'updateCart'])->name('cart.up
 Route::post('cart/destroy', [CartController::class, 'destroyCart'])->name('cart.destroy');
 
 //Checkout
-Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
-
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
+    Route::post('order-products', [CartController::class, 'order'])->name('order.confirm');
+    Route::get('thankyou', [CartController::class, 'thankyou'])->name('thankyou');
+});
 //
 Route::get('purchase-policy', [PolicyController::class, 'purchase'])->name('policy.purchase');
 
@@ -61,8 +64,15 @@ Route::get('blogs/tag/{tag:slug}', [BlogController::class, 'tag'])->name('posts.
 Route::get('contact-us', [ContactController::class, 'index'])->name('contact');
 Route::post('contact-us', [ContactController::class, 'store'])->name('contact');
 
-//Languagues
-Route::get('languages/{language}', [HomeController::class, 'language'])->name('language');
+//User
+Route::prefix('user')->middleware(['auth'])->group(function () {
+    
+    Route::get('dashboard', [UserController::class, 'index'])->name('user.dashboard');
+    Route::patch('update/{user}', [UserController::class, 'update'])->name('user.update');
+    Route::get('change-password', [UserController::class, 'password'])->name('user.password');
+    Route::patch('change-password', [UserController::class, 'changePassword'])->name('user.password');
+    Route::get('order', [UserController::class, 'order'])->name('user.order');
+});
 
-//Authentication with non register
+//Authentication 
 Auth::routes();

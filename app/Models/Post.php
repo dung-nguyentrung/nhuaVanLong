@@ -25,10 +25,11 @@ class Post extends Model implements HasMedia
 
     protected $fillable = [
         'post_category_id',
-        'name_vi', 'name_en', 'name_jp',
+        'name',
         'slug', 'view', 'status',
-        'short_description_vi', 'short_description_en', 'short_description_jp',
-        'description_vi', 'description_en', 'description_jp',
+        'short_description',
+        'description',
+        'image',
         'created_at', 'updated_at', 'deleted_at'
     ];
 

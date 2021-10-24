@@ -1,9 +1,4 @@
 @extends('layouts.base')
-@php
-    $name = 'name_'.config('app.locale');
-    $short = 'short_description_'.config('app.locale');
-    $desc = 'description_'.config('app.locale');
-@endphp
 @section('content')
 <!-- Start of Main -->
 <main class="main mb-10 pb-1">
@@ -18,14 +13,14 @@
                 <span class="product-nav-popup">
                     <img src="{{ $product->getFirstMediaUrl('products','thumb') }}" alt="Product" width="110"
                         height="110" />
-                    <span class="product-name">{{ $product->$name }}}</span>
+                    <span class="product-name">{{ $product->name }}}</span>
                 </span>
             </li>
             <li class="product-nav-next">
                 <span class="product-nav-popup">
                     <img src="{{ $product->getFirstMediaUrl('products','thumb') }}" alt="Product" width="110"
                         height="110" />
-                    <span class="product-name">{{ $product->$name }}}</span>
+                    <span class="product-name">{{ $product->name }}}</span>
                 </span>
             </li>
         </ul>
@@ -51,7 +46,7 @@
                                             <figure class="product-image">
                                                 <img src="{{ $product->getFirstMediaUrl('products') }}"
                                                     data-zoom-image="{{ $product->getFirstMediaUrl('products') }}"
-                                                    alt="{{ $product->$name }}" width="800" height="900">
+                                                    alt="{{ $product->name }}" width="800" height="900">
                                             </figure>
                                         </div>
                                     </div>
@@ -60,12 +55,12 @@
                         </div>
                         <div class="col-md-6 mb-4 mb-md-6">
                             <div class="product-details" data-sticky-options="{'minWidth': 767}">
-                                <h1 class="product-title">{{ $product->$name }}</h1>
+                                <h1 class="product-title">{{ $product->name }}</h1>
                                 <div class="product-bm-wrapper">
                                     <div class="product-meta">
                                         <div class="product-categories">
                                             Danh mục:
-                                            <span class="product-category"><a href="{{ route('products.category', ['category' => $product->category->slug]) }}">{{ $product->category->$name }}</a></span>
+                                            <span class="product-category"><a href="{{ route('products.category', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></span>
                                         </div>
                                         <div class="product-sku">
                                             SKU: <span>{{ $product->slug }}</span>
@@ -77,7 +72,7 @@
 
                                 {{-- <div class="product-price"><ins class="new-price">$40.00</ins></div> --}}
                                 <div class="product-short-desc">
-                                    <p>{{ $product->$short }}</p>
+                                    <p>{{ $product->short_description }}</p>
                                 </div>
 
                                 <hr class="product-divider">
@@ -86,7 +81,7 @@
                                         <form action="{{ route('products.cart') }}" method="post">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $product->id }}">
-                                            <input type="hidden" name="name" value="{{ $product->$name }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
                                             <input type="hidden" name="price" value="{{ $product->price }}">
                                             <button type="submit" class="btn btn-primary btn-cart">
                                                 <i class="fa fa-shopping-cart"></i>
@@ -142,12 +137,14 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        @if ($product->getFirstMedia('product_drawing'))
                                         <h3 class="mt-3">Bản vẽ kỹ thuật</h3>
                                         <div align="center">
-                                            <img src="{{ $product->getFirstMediaUrl('product_drawing') }}" width="400" height="160" class="mt-5 img-fluid" alt="{{ $product->$name }}">
+                                            <img src="{{ $product->getFirstMediaUrl('product_drawing') }}" width="400" height="160" class="mt-5 img-fluid" alt="{{ $product->name }}">
                                         </div>
-                                        <h3>Mô tả sản phẩm</h3>
-                                        {!! $product->$desc !!}
+                                        @endif
+                                        <h3 class="mt-3">Mô tả sản phẩm</h3>
+                                        {!! $product->description !!}
                                     </div>
                                 </div>
                             </div>
@@ -178,7 +175,7 @@
                                 <div class="swiper-slide product">
                                     <figure class="product-media">
                                         <a href="product-default.html">
-                                            <img src="{{ $product->getFirstMediaUrl('products', 'thumb') }}" alt="{{ $product->$name }}"
+                                            <img src="{{ $product->getFirstMediaUrl('products', 'thumb') }}" alt="{{ $product->name }}"
                                                 width="300" height="338" />
                                         </a>
                                         <div class="product-action-vertical">
@@ -192,7 +189,7 @@
                                         </div>
                                     </figure>
                                     <div class="product-details">
-                                        <h4 class="product-name"><a href="{{ route('products.detail', ['product' => $product->slug]) }}">{{ $product->$name }}</a></h4>
+                                        <h4 class="product-name"><a href="{{ route('products.detail', ['product' => $product->slug]) }}">{{ $product->name }}</a></h4>
                                     </div>
                                 </div>                                    
                                 @endforeach
@@ -227,13 +224,13 @@
                                                 <div class="product product-widget">
                                                     <figure class="product-media">
                                                         <a href="{{ route('products.detail', ['product' => $product->slug]) }}">
-                                                            <img src="{{ $product->getFirstMediaUrl('products') }}" alt="{{ $product->$name }}"
+                                                            <img src="{{ $product->getFirstMediaUrl('products') }}" alt="{{ $product->name }}"
                                                                 width="100" height="113" />
                                                         </a>
                                                     </figure>
                                                     <div class="product-details">
                                                         <h4 class="product-name">
-                                                            <a href="{{ route('products.detail', ['product' => $product->slug]) }}">{{ $product->$name }}</a>
+                                                            <a href="{{ route('products.detail', ['product' => $product->slug]) }}">{{ $product->name }}</a>
                                                         </h4>
                                                     </div>
                                                 </div>

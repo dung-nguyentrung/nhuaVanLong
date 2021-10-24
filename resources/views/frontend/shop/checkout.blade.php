@@ -17,7 +17,8 @@
     <!-- Start of PageContent -->
     <div class="page-content">
         <div class="container">
-            <form class="form checkout-form" action="#" method="post">
+            <form class="form checkout-form" action="{{ route('order.confirm') }}" method="post">
+                @csrf
                 <div class="row mb-9">
                     <div class="col-lg-7 pr-lg-4 mb-4">
                         <h3 class="title billing-title text-uppercase ls-10 pt-1 pb-3 mb-0">
@@ -28,19 +29,19 @@
                                 <div class="form-group">
                                     <label>Họ và tên *</label>
                                     <input type="text" class="form-control form-control-md" name="name"
-                                        required placeholder="vd: Nguyễn Văn A">
+                                        required placeholder="Nguyễn Văn A">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Tên công ty</label>
-                            <input type="text" class="form-control form-control-md" name="company_name" placeholder="vd: Công ty ABC">
+                            <input type="text" class="form-control form-control-md" name="company_name" placeholder="Công ty ABC">
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Tỉnh / Thành phố</label>
-                                <select name="province" id="province" class="form-control">
-                                    <option value="0">-- Chọn --</option>
+                                <select name="province_id" id="province" class="form-control">
+                                    <option value="">-- Chọn --</option>
                                     @foreach ($provinces as $province)
                                         <option value="{{ $province->id }}">{{ $province->name }}</option>
                                     @endforeach
@@ -50,31 +51,35 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Quận / Huyện</label>
-                                <select name="district" id="district" class="form-control">
-                                    <option value="0">-- Chọn --</option>
+                                <select name="district_id" id="district" class="form-control">
+                                    <option value="">-- Chọn --</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Phường / Xã</label>
-                                <select name="ward" id="ward" class="form-control">
-                                    <option value="0">-- Chọn --</option>
+                                <select name="ward_id" id="ward" class="form-control">
+                                    <option value="">-- Chọn --</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Địa chỉ cụ thể*</label>
-                            <input type="text" placeholder="House number and street name"
-                                class="form-control form-control-md mb-2" name="address" placeholder="vd: Số 4, Lý Tự Trọng" required>
+                            <input type="text"
+                                class="form-control form-control-md mb-2" name="address" placeholder="Số 4, Lý Tự Trọng" required>
                         </div>
                         <div class="form-group mb-7">
                             <label>Địa chỉ email *</label>
-                            <input type="email" class="form-control form-control-md" name="email" required>
+                            <input type="email" class="form-control form-control-md" placeholder="khachhang@vanlongplastic.com.vn" name="email" required>
+                            <input type="hidden" name="tax" value="{{ Cart::tax(0,'','') }}">
+                            <input type="hidden" name="shipping" value="0">
+                            <input type="hidden" name="subtotal" value="{{ Cart::subtotal(0,'','') }}">
+                            <input type="hidden" name="total" value="{{ Cart::total(0,'','') }}">
                         </div>
                         <div class="form-group mb-7">
                             <label>Điện thoại *</label>
-                            <input type="text" class="form-control form-control-md" name="phone" required>
+                            <input type="text" class="form-control form-control-md" placeholder="0123456789" name="phone" required>
                         </div>
                         <div class="form-group mt-3">
                             <label for="order-notes">Ghi chú</label>
@@ -100,61 +105,55 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach (Cart::instance('cart')->content() as $item)
                                         <tr class="bb-no">
-                                            <td class="product-name">Palm Print Jacket <i
+                                            <td class="product-name">{{ $item->model->name }}<i
                                                     class="fas fa-times"></i> <span
-                                                    class="product-quantity">1</span></td>
-                                            <td class="product-total">$40.00</td>
-                                        </tr>
-                                        <tr class="bb-no">
-                                            <td class="product-name">Brown Backpack <i class="fas fa-times"></i>
-                                                <span class="product-quantity">1</span></td>
-                                            <td class="product-total">$60.00</td>
-                                        </tr>                                        
+                                                    class="product-quantity">{{ $item->qty }}</span>
+                                                    <input type="hidden" name="products[]" value="{{ $item->model->id }}">
+                                                    <input type="hidden" name="quantity[{{ $item->model->id }}]" value="{{ $item->qty }}">
+                                                    <input type="hidden" name="price[{{ $item->model->id }}]" value="{{ $item->model->price }}">
+                                            </td>
+                                            <td class="product-total">{{ number_format($item->qty * $item->model->price) }} đồng</td>
+                                        </tr>                                            
+                                        @endforeach                                        
                                         <tr class="cart-subtotal bb-no">
                                             <td>
                                                 <p>Thuế</p>
                                             </td>
                                             <td>
-                                                <p>$100.00</p>
+                                                <p>{{ Cart::instance('cart')->tax(0,'',',') }} đồng</p>
                                             </td>
                                         </tr>
                                         <tr class="cart-subtotal bb-no">
                                             <td>
-                                                <p>Chi phí vận chuyển</p>
+                                                <p>Tổng tiền</p>
                                             </td>
                                             <td>
-                                                <p>Miễn phí</p>
+                                                <p>{{ Cart::instance('cart')->subtotal(0,'',',') }} đồng</p>
                                             </td>
                                         </tr>
                                         <tr class="cart-subtotal bb-no">
                                             <td>
-                                                <b>Tổng tiền</b>
+                                                <b>Thành tiền</b>
                                             </td>
                                             <td>
-                                                <b>$100.00</b>
+                                                <b>{{ Cart::instance('cart')->total(0,'',',') }} đồng</b>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
 
                                 <div class="payment-methods" id="payment_method">
-                                    <h4 class="title font-weight-bold ls-25 pb-0 mb-1">Phương thức thanh toán</h4>
+                                    <h4 class="title font-weight-bold ls-25 pb-0 mb-1">Phương thức vận chuyển</h4>
                                     <div class="accordion payment-accordion">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <a href="#bank-tranfer" class="collapse">Thanh toán trực tuyến</a>
-                                            </div>
+                                        <div class="mt-3">
+                                            <input type="radio" name="shipping_method" checked id="customer" value="0">
+                                            <label for="customer">Quý khách nhận hàng trực tiếp tại công ty</label> 
                                         </div>
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <a href="#banking" class="expand">Chuyển khoản</a>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <a href="#delivery" class="expand">Thanh toán khi giao hàng</a>
-                                            </div>
+                                        <div class="mt-3">
+                                            <input type="radio" name="shipping_method" id="company" value="1">
+                                            <label for="company">Công ty giao hàng cho quý khách</label>
                                         </div>
                                     </div>
                                 </div>

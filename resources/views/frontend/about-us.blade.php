@@ -3,9 +3,6 @@
 @section('content')
 <!-- Start of Main -->
 <main class="main">
-    @php
-        $description = 'description_'.config('app.locale');
-    @endphp
     <x-page-header title="Giới thiệu"></x-page-header>
 
     <!-- Start of Page Content -->
@@ -15,7 +12,7 @@
                 <h2 class="title title-center">
                     Công ty TNHH Nhựa Vân Long
                 </h2>
-                <p class=" mx-auto text-center">{{ $setting->$description ?? '' }}</p>
+                <p class=" mx-auto text-center">{{ $setting->description ?? '' }}</p>
                 <div class="embed-responsive embed-responsive-16by9">
                 <iframe width="1240" height="535" src="https://www.youtube.com/embed/5ZHDN6MIxGc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>

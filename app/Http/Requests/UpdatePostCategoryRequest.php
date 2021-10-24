@@ -31,30 +31,18 @@ class UpdatePostCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_vi' => [
+            'name' => [
                 'required',
                 'string',
-                Rule::unique('post_categories', 'name_vi')->ignore($this->post_category),
+                Rule::unique('post_categories', 'name')->ignore($this->post_category),
             ],
-            'name_en' => [
-                'required',
-                'string',
-                Rule::unique('post_categories', 'name_en')->ignore($this->post_category),
-            ],
-            'name_jp' => [
-                'required',
-                'string',
-                Rule::unique('post_categories', 'name_jp')->ignore($this->post_category),
-            ]
         ];
     }
 
     public function attributes()
     {
         return [
-            'name_vi' => 'Tên danh mục bài viết (VI)',
-            'name_en' => 'Tên danh mục bài viết (EN)',
-            'name_jp' => 'Tên danh mục bài viết (JP)',
+            'name' => 'Tên danh mục bài viết',
         ];
     }
 

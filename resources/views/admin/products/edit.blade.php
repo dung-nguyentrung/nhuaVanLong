@@ -30,12 +30,10 @@
                                     @endforeach
                                 </select>
                             </div>     
-                            @foreach (config('app.available_locales') as $item)
                             <div class="col-md-6 form-group">
-                                    <label>Tên sản phẩm ({{ strToUpper($item) }})</label>
-                                    <input type="text" name="name_{{ $item }}" value="{{ $product->name_vi }}" class="form-control" placeholder="Nhập tên sản phẩm {{ $item }}">                                                         
-                            </div>                                 
-                            @endforeach
+                                    <label>Tên sản phẩm</label>
+                                    <input type="text" name="name" value="{{ $product->name}}" class="form-control" placeholder="Nhập tên sản phẩm">                                                         
+                            </div>     
                             <div class="col-md-3 form-group">
                                 <label>Trọng lượng</label>
                                 <input type="number" name="weight" value="{{ $product->weight }}" class="form-control" placeholder="Nhập trọng lượng sản phẩm">                                                         
@@ -70,26 +68,16 @@
                                 <input type="file" name="drawing" onchange="loadPreviewDrawing(this);">
                                 <img id="preview_drawing" class="mt-3" src="{{ $product->getFirstMediaUrl('product_drawing') }}" width="200" height="150"/>
                             </div>
-                            @foreach (config('app.available_locales') as $item)
-                            @php
-                                $short = 'short_description_'.$item;
-                            @endphp
                             <div class="col-md-12 form-group">
-                                <label>Mô tả sản phẩm ({{ strToUpper($item) }})</label>
-                                <textarea name="short_description_{{ $item }}" class="form-control" rows="3">{{ $product->$short }}</textarea>
+                                <label>Mô tả sản phẩm</label>
+                                <textarea name="short_description" class="form-control" rows="3">{{ $product->short_description }}</textarea>
                             </div>
-                            @endforeach
-                            @foreach (config('app.available_locales') as $item)
-                            @php
-                                $desc = 'description_'.$item;
-                            @endphp
                             <div class="col-md-12 form-group">
-                                <label>Chi tiết sản phẩm ({{ strToUpper($item) }})</label>
-                                <textarea name="description_{{ $item }}" id="description_{{ $item }}" class="form-control" rows="12">
-                                    {{ $product->$desc }}
+                                <label>Chi tiết sản phẩm</label>
+                                <textarea name="description" id="description" class="form-control" rows="12">
+                                    {{ $product->description }}
                                 </textarea>
                             </div>
-                            @endforeach
                         </div>                            
                         <button type="submit" class="btn btn-primary mr-2">Lưu lại</button>
                     </form>
@@ -107,95 +95,7 @@
     
     <script>
         tinymce.init({
-            selector: '#description_vi',
-          setup: (editor) => {
-            editor.on('change', (e) => {
-                editor.on('init change', function() {
-                    editor.save();
-                });
-            })
-          },
-          plugins: [
-                    "advlist autolink lists link image charmap print preview anchor",
-                    "searchreplace visualblocks code fullscreen",
-                    "insertdatetime media table contextmenu paste imagetools"
-                ],
-                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-                content_css: [
-                    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                    '//www.tinymce.com/css/codepen.min.css'
-                ],
-                image_title: true,
-                automatic_uploads: true,
-                images_upload_url: '/upload',
-                file_picker_types: 'image',
-                file_picker_callback: function(cb, value, meta) {
-                    var input = document.createElement('input');
-                    input.setAttribute('type', 'file');
-                    input.setAttribute('accept', 'image/*');
-                    input.onchange = function() {
-                        var file = this.files[0];
-    
-                        var reader = new FileReader();
-                        reader.readAsDataURL(file);
-                        reader.onload = function () {
-                            var id = 'blobid' + (new Date()).getTime();
-                            var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-                            var base64 = reader.result.split(',')[1];
-                            var blobInfo = blobCache.create(id, file, base64);
-                            blobCache.add(blobInfo);
-                            cb(blobInfo.blobUri(), { title: file.name });
-                        };
-                    };
-                    input.click();
-                }
-       });
-       tinymce.init({
-            selector: '#description_en',
-          setup: (editor) => {
-            editor.on('change', (e) => {
-                editor.on('init change', function() {
-                    editor.save();
-                });
-            })
-          },
-          plugins: [
-                    "advlist autolink lists link image charmap print preview anchor",
-                    "searchreplace visualblocks code fullscreen",
-                    "insertdatetime media table contextmenu paste imagetools"
-                ],
-                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-                content_css: [
-                    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                    '//www.tinymce.com/css/codepen.min.css'
-                ],
-                image_title: true,
-                automatic_uploads: true,
-                images_upload_url: '/upload',
-                file_picker_types: 'image',
-                file_picker_callback: function(cb, value, meta) {
-                    var input = document.createElement('input');
-                    input.setAttribute('type', 'file');
-                    input.setAttribute('accept', 'image/*');
-                    input.onchange = function() {
-                        var file = this.files[0];
-    
-                        var reader = new FileReader();
-                        reader.readAsDataURL(file);
-                        reader.onload = function () {
-                            var id = 'blobid' + (new Date()).getTime();
-                            var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-                            var base64 = reader.result.split(',')[1];
-                            var blobInfo = blobCache.create(id, file, base64);
-                            blobCache.add(blobInfo);
-                            cb(blobInfo.blobUri(), { title: file.name });
-                        };
-                    };
-                    input.click();
-                }
-       });
-       tinymce.init({
-            selector: '#description_jp',
+            selector: '#description',
           setup: (editor) => {
             editor.on('change', (e) => {
                 editor.on('init change', function() {

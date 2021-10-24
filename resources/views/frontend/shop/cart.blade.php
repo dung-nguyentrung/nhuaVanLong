@@ -1,7 +1,5 @@
 @extends('layouts.base')
-@php
-    $name = 'name_'.config('app.locale')
-@endphp
+
 @section('content')
 <!-- Start of Main -->
 <main class="main cart">
@@ -48,7 +46,7 @@
                                 </td>
                                 <td class="product-name">
                                     <a href="{{ route('products.detail', ['product' => $item->model->slug]) }}">
-                                        {{ $item->model->$name }}
+                                        {{ $item->model->name }}
                                     </a>
                                 </td>
                                 <td class="product-price"><span class="amount">{{ number_format($item->model->price) }} đ</span></td>
@@ -65,12 +63,24 @@
                                 </form>
                                 </td>
                                 <td class="product-subtotal">
-                                    <span class="amount">{{ Cart::subtotal(0,'',',') }} đ</span>
+                                    <span class="amount">{{ number_format($item->qty * $item->model->price) }} đ</span>
                                 </td>
                             </tr>                                
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Tổng tiền:</th>
+                                <th class="product-subtotal">
+                                    <span class="amount">{{ Cart::subtotal(0,'',',') }}</span> đồng
+                                </th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
                     </table>
+
+
 
                     <div class="cart-action mb-6">
                         <a href="/shop" class="btn btn-dark btn-rounded btn-icon-left btn-shopping mr-auto"><i class="fa fa-long-arrow-alt-right"></i>Tiếp tục mua hàng</a>
@@ -80,7 +90,7 @@
                         </form>
                     </div>
 
-                    <a href="/shop" class="btn btn-dark btn-rounded btn-icon-left btn-shopping mr-auto"><i class="far fa-credit-card"></i>Đặt hàng</a>
+                    <a href="/checkout" class="btn btn-dark btn-rounded btn-icon-left btn-shopping mr-auto"><i class="far fa-credit-card"></i>Đặt hàng</a>
                 </div>
                 <div class="col-lg-4">
                     <aside class="sidebar product-sidebar sidebar-fixed right-sidebar sticky-sidebar-wrapper">
@@ -109,13 +119,13 @@
                                                     <div class="product product-widget">
                                                         <figure class="product-media">
                                                             <a href="{{ route('products.detail', ['product' => $product->slug]) }}">
-                                                                <img src="{{ $product->getFirstMediaUrl('products') }}" alt="{{ $product->$name }}"
+                                                                <img src="{{ $product->getFirstMediaUrl('products') }}" alt="{{ $product->name }}"
                                                                     width="100" height="113" />
                                                             </a>
                                                         </figure>
                                                         <div class="product-details">
                                                             <h4 class="product-name">
-                                                                <a href="{{ route('products.detail', ['product' => $product->slug]) }}">{{ $product->$name }}</a>
+                                                                <a href="{{ route('products.detail', ['product' => $product->slug]) }}">{{ $product->name }}</a>
                                                             </h4>
                                                         </div>
                                                     </div>

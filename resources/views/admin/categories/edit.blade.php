@@ -21,34 +21,11 @@
                         @method('put')
                         <div class="row">         
                             <div class="col-md-12">
-                                @foreach (config('app.available_locales') as $item)
-                                @php
-                                    $name = 'name_'.$item;
-                                @endphp
                                 <div class="form-group">
-                                    <label>Tên danh mục sản phẩm ({{ strToUpper($item) }})</label>
-                                    <input type="text" value="{{ $category->$name }}" name="name_{{ $item }}" class="form-control" placeholder="Nhập tên danh mục sản phẩm {{ $item }}">
+                                    <label>Tên danh mục sản phẩm</label>
+                                    <input type="text" value="{{ $category->name }}" name="name" class="form-control" placeholder="Nhập tên danh mục sản phẩm">
                                     <div class="help-block with-errors"></div>
-                                </div>                                                          
-                                @endforeach
-                                <div class="col-md-4 form-group">
-                                    <label>Hình ảnh</label><br>
-                                    <input type="file" name="image" onchange="loadPreview(this);">
-                                </div>
-                                <div class="col-md-8 form-group">
-                                    <img id="preview_img" src="{{ $category->getFirstMediaUrl('categories') }}" width="200" alt="Temporary image">
-                                </div>        
-                                @foreach (config('app.available_locales') as $item)
-                                @php
-                                    $desc = 'description_'.$item;
-                                @endphp
-                                    <div class="col-lg-12 form-group">
-                                        <label>Mô tả danh mục sản phẩm ({{ strToUpper($item) }})</label>
-                                        <textarea name="description_{{ $item }}" class="form-control" rows="4">
-                                            {{ $category->$desc }}
-                                        </textarea>
-                                    </div>
-                                @endforeach
+                                </div>                                       
                             </div>                                 
                         </div>                            
                         <button type="submit" class="btn btn-primary mr-2">Lưu lại</button>
@@ -63,22 +40,4 @@
 @push('scripts')
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     {!! Toastr::message() !!}    
-
-    <script>
-        function loadPreview(input, id) {
-        id = id || '#preview_img';
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-    
-            reader.onload = function (e) {
-                $(id)
-                    .attr('src', e.target.result)
-                    .width(200)
-                    .height(150);
-            };
-    
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    </script>
 @endpush

@@ -19,16 +19,11 @@
                         @csrf
                         <div class="row">         
                             <div class="col-md-12">
-                                @foreach (config('app.available_locales') as $item)
-                                @php
-                                    $desc = 'description_'.$item;
-                                @endphp
                                 <div class="form-group">
-                                    <label>Mô tả website({{ strToUpper($item) }})</label>
-                                    <input type="text" name="description_{{ $item }}" class="form-control" value="{{ $setting->$desc ?? '' }}">
+                                    <label>Mô tả website</label>
+                                    <input type="text" name="description" class="form-control" value="{{ $setting->description ?? '' }}">
                                     <div class="help-block with-errors"></div>
-                                </div>                                                          
-                                @endforeach
+                                </div>        
                             </div> 
                             <div class="form-group col-lg-4">
                                 <label>Email</label>
@@ -46,16 +41,11 @@
                                 <div class="help-block with-errors"></div>
                             </div>  
                             <div class="col-md-12">
-                                @foreach (config('app.available_locales') as $item)
-                                @php
-                                    $address = 'address_'.$item;
-                                @endphp
                                 <div class="form-group">
-                                    <label>Địa chỉ công ty {{ strToUpper($item) }})</label>
-                                    <input type="text" name="address_{{ $item }}" class="form-control" value="{{ $setting->$address ?? '' }}">
+                                    <label>Địa chỉ công ty</label>
+                                    <input type="text" name="address" class="form-control" value="{{ $setting->address ?? '' }}">
                                     <div class="help-block with-errors"></div>
-                                </div>                                                          
-                                @endforeach
+                                </div>    
                             </div>  
                             <div class="form-group col-lg-12">
                                 <label>Giờ mở cửa</label>

@@ -1,7 +1,4 @@
 @extends('layouts.base')
-@php
-    $name = 'name_'.config('app.locale')
-@endphp
 @section('content')
 <!-- Start of Main -->
 <main class="main">
@@ -41,13 +38,13 @@
                             <div class="product text-center">
                                 <figure class="product-media">
                                     <a href="{{ route('products.detail', ['product' => $product->slug]) }}">
-                                        <img src="{{ $product->getFirstMediaUrl('products') }}" alt="{{ $product->$name }}" width="300"
+                                        <img src="{{ $product->getFirstMediaUrl('products') }}" alt="{{ $product->name }}" width="300"
                                             height="338" />
                                     </a>
                                     <div class="product-action-horizontal">
-                                        <a href="#" id="addToCart" data-id="{{ $product->id }}" class="btn-product-icon btn-cart"
+                                        <a href="#" data-id="{{ $product->id }}" class="addToCart btn-product-icon btn-cart"
                                             title="Add to cart"><i class="fa fa-shopping-cart"></i></a>
-                                        <a href="#" id="wishlist" data-id="{{ $product->id }}" class="btn-product-icon btn-wishlist"
+                                        <a href="#" data-id="{{ $product->id }}" class="addToWishlist btn-product-icon btn-wishlist"
                                             title="Wishlist"><i class="fa fa-heart"></i></a>
                                         <a href="{{ route('products.detail', ['product' => $product->slug]) }}" class="btn-product-icon btn-quickview"
                                             title="Quick View"><i class="fa fa-info-circle"></i></a>
@@ -55,10 +52,10 @@
                                 </figure>
                                 <div class="product-details">
                                     <div class="product-cat">
-                                        <a href="{{ route('products.category', ['category' => $product->category->slug]) }}">{{ $product->category->$name }}</a>
+                                        <a href="{{ route('products.category', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a>
                                     </div>
                                     <h3 class="product-name">
-                                        <a href="{{ route('products.detail', ['product' => $product->slug]) }}">{{ $product->$name }}</a>
+                                        <a href="{{ route('products.detail', ['product' => $product->slug]) }}">{{ $product->name }}</a>
                                     </h3>
                                 </div>
                             </div>
@@ -83,7 +80,7 @@
 @push('scripts')
     <script>
         $(document).ready(function () {
-            $('#wishlist').click(function (e) { 
+            $('.addToWishlist').click(function (e) { 
                 e.preventDefault();
                 let id = $(this).attr('data-id');
 
@@ -103,7 +100,7 @@
                     }
                 });
             });
-            $('#addToCart').click(function (e) { 
+            $('.addToCart').click(function (e) { 
                 e.preventDefault();
                 
                 let id = $(this).attr('data-id');

@@ -1,6 +1,4 @@
-@php
-    $name = 'name_'.config('app.locale')
-@endphp
+
 <div class="header-left mr-md-4">
     <a href="" class="mobile-menu-toggle  w-icon-hamburger" aria-label="menu-toggle">
     </a>
@@ -12,7 +10,7 @@
             <select id="category" name="category">
                 <option value="">Tất cả</option>
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->$name }}</option>                    
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>                    
                 @endforeach
             </select>
         </div>

@@ -30,11 +30,7 @@ class SettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'description_vi' => [
-                'required',
-                'string'
-            ],
-            'description_jp' => [
+            'description' => [
                 'required',
                 'string'
             ],
@@ -48,15 +44,7 @@ class SettingRequest extends FormRequest
             'fax'            => [
                 'required'
             ],
-            'address_vi'     => [
-                'required',
-                'string'
-            ],
-            'address_en'     => [
-                'required',
-                'string'
-            ],
-            'address_jp'     => [
+            'address'     => [
                 'required',
                 'string'
             ],
@@ -70,15 +58,11 @@ class SettingRequest extends FormRequest
     public function attributes()
     {
         return [
-            'description_vi' => 'Mô tả website vi',
-            'description_en' => 'Mô tả website en',
-            'description_jp' => 'Mô tả website jp',
+            'description' => 'Mô tả website',
             'email' => 'Email',
             'phone' => 'Điện thoại',
             'fax' => 'Fax',
-            'address_vi' => 'Địa chỉ vi',
-            'address_en' => 'Địa chỉ en',
-            'address_jp' => 'Địa chỉ jp',
+            'address' => 'Địa chỉ',
             'open_time' => 'Thời gian mở cửa',
         ];
     }

@@ -51,8 +51,6 @@
     @php
         $setting = App\Models\Setting::first();
         $categories = App\Models\Category::all();
-        $description = 'description_'.config('app.locale');
-        $name = 'name_'.config('app.locale');
     @endphp
     <div class="page-wrapper">
         <!-- Start of Header -->
@@ -94,7 +92,7 @@
                         <a href="/contact-us" class="d-lg-show">Liên lạc</a>
                         @if(Route::has('login'))
                             @auth
-                            <a href="/" class="d-lg-show">Tài khoản của tôi</a>
+                            <a href="{{ route('user.dashboard') }}" class="d-lg-show">Tài khoản của tôi</a>
                             @else
                             <a href="{{ route('login') }}" class="d-lg-show login sign-in"><i
                                     class="w-icon-account"></i>Đăng nhập</a>
@@ -155,7 +153,7 @@
                                         @foreach ($categories as $category)
                                         <li>
                                             <a href="">
-                                                <i class="fa fa-dot-circle"></i>{{ $category->$name }}
+                                                <i class="fa fa-dot-circle"></i>{{ $category->name }}
                                             </a>
                                         </li>                                                                                    
                                         @endforeach
@@ -189,8 +187,8 @@
         <!-- End of Header -->
 
         @yield('content')
-           <!-- Start of Footer -->
-           <footer class="footer appear-animate" data-animation-options="{
+        <!-- Start of Footer -->
+        <footer class="footer appear-animate" data-animation-options="{
             'name': 'fadeIn'
         }">
             <div class="footer-newsletter bg-primary pt-6 pb-6">
@@ -209,7 +207,7 @@
                                 <div class="widget-body">
                                     <p class="widget-about-title">Gọi ngay cho chúng tôi !</p>
                                     <a href="tel:{{ $setting->phone }}" class="widget-about-call">{{ $setting->phone }}</a>
-                                    <p class="widget-about-desc">{{ $setting->$description }}</p>
+                                    <p class="widget-about-desc">{{ $setting->description }}</p>
                                 </div>
                             </div>
                         </div>

@@ -21,16 +21,11 @@
                         @method('put')
                         <div class="row">         
                             <div class="col-md-12">
-                                @foreach (config('app.available_locales') as $item)
-                                @php
-                                    $name = 'name_'.$item;
-                                @endphp
                                 <div class="form-group">
-                                    <label>Tên danh mục bài viết ({{ strToUpper($item) }})</label>
-                                    <input type="text" value="{{ $postCategory->$name }}" name="name_{{ $item }}" class="form-control" placeholder="Nhập tên danh mục bài viết {{ $item }}">
+                                    <label>Tên danh mục bài viết</label>
+                                    <input type="text" value="{{ $postCategory->name }}" name="name" class="form-control" placeholder="Nhập tên danh mục bài viết">
                                     <div class="help-block with-errors"></div>
-                                </div>                                                          
-                                @endforeach
+                                </div>     
                             </div>                                 
                         </div>                            
                         <button type="submit" class="btn btn-primary mr-2">Lưu lại</button>

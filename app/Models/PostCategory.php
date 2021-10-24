@@ -14,7 +14,7 @@ class PostCategory extends Model
     protected $table = 'post_categories';
 
     protected $fillable = [
-        'name_vi', 'name_en', 'name_jp',
+        'name',
         'slug',
         'created_at', 'updated_at'
     ];

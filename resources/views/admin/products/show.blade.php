@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', $product->name_vi)
+@section('title', $product->name)
 
 @section('content')
 <div class="container-fluid">
@@ -8,7 +8,7 @@
         <div class="col-lg-12">
             <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                 <div>
-                    <h4 class="mb-3">{{ $product->name_vi }}</h4>
+                    <h4 class="mb-3">{{ $product->name }}</h4>
                 </div>
                 <div>
                     @can('product_access')
@@ -27,19 +27,11 @@
                     </tr>
                     <tr>
                         <th>Danh mục</th>
-                        <th>{{ $product->category->name_vi }}</th>
+                        <th>{{ $product->category->name }}</th>
                     </tr>
                     <tr>
-                        <th>Tên sản phẩm (VI)</th>
-                        <th>{{ $product->name_vi }}</th>
-                    </tr>
-                    <tr>
-                        <th>Tên sản phẩm (EN)</th>
-                        <th>{{ $product->name_en }}</th>
-                    </tr>
-                    <tr>
-                        <th>Tên sản phẩm (JP)</th>
-                        <th>{{ $product->name_jp }}</th>
+                        <th>Tên sản phẩm</th>
+                        <th>{{ $product->name }}</th>
                     </tr>
                     <tr>
                         <th>Trọng lượng</th>
@@ -63,28 +55,19 @@
                     </tr>
                     <tr>
                         <th>Hình ảnh</th>
-                        <th><img src="{{ $product->getFirstMediaUrl('products') }}" width="200" alt="{{ $product->name_vi }}"></th>
+                        <th><img src="{{ $product->getFirstMediaUrl('products') }}" width="200" alt="{{ $product->name }}"></th>
                     </tr>
                     <tr>
                         <th>Bản vẽ kỹ thuật</th>
-                        <th><img src="{{ $product->getFirstMediaUrl('product_drawing') }}" width="200" alt="{{ $product->name_vi }}"></th>
+                        <th><img src="{{ $product->getFirstMediaUrl('product_drawing') }}" width="200" alt="{{ $product->name }}"></th>
                     </tr>
-                    @foreach (config('app.available_locales') as $item)
-                    @php
-                        $short = 'short_description_'.$item;
-                    @endphp
                         <tr>
-                            <th>Mô tả sản phẩm ({{ strToUpper($item) }})</th>
-                            <th>{{ $product->$short }}</th>
+                            <th>Mô tả sản phẩm</th>
+                            <th>{{ $product->short_description }}</th>
                         </tr>
-                    @endforeach
-                    @foreach (config('app.available_locales') as $item)
-                    @php
-                        $desc = 'description_'.$item;
-                    @endphp
                         <tr>
-                            <th>Chi tiết sản phẩm ({{ strToUpper($item) }})</th>
-                            <th>{!! $product->$desc !!}</th>
+                            <th>Chi tiết sản phẩm</th>
+                            <th>{!! $product->description !!}</th>
                         </tr>
                     @endforeach
                 </tbody>

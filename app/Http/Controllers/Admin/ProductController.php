@@ -36,7 +36,7 @@ class ProductController extends Controller
     public function create()
     {
         abort_if(Gate::denies('product_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $categories = Category::all()->pluck('name_vi', 'id');
+        $categories = Category::all()->pluck('name', 'id');
 
         return view('admin.products.create', compact('categories'));
     }
@@ -78,7 +78,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         abort_if(Gate::denies('product_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $categories = Category::all()->pluck('name_vi', 'id');
+        $categories = Category::all()->pluck('name', 'id');
         
         return view('admin.products.edit', compact('product', 'categories'));
     }

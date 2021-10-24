@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', $category->name_vi)
+@section('title', $category->name)
 
 @section('content')
 <div class="container-fluid">
@@ -8,7 +8,7 @@
         <div class="col-lg-12">
             <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                 <div>
-                    <h4 class="mb-3">{{ $category->name_vi }}</h4>
+                    <h4 class="mb-3">{{ $category->name }}</h4>
                 </div>
                 <div>
                     @can('category_access')
@@ -26,34 +26,8 @@
                         <th>{{ $category->id }}</th>
                     </tr>
                     <tr>
-                        <th>Tên danh mục sản phẩm (VI)</th>
-                        <th>{{ $category->name_vi }}</th>
-                    </tr>
-                    <tr>
-                        <th>Tên danh mục sản phẩm (EN)</th>
-                        <th>{{ $category->name_en }}</th>
-                    </tr>
-                    <tr>
-                        <th>Tên danh mục sản phẩm (JP)</th>
-                        <th>{{ $category->name_jp }}</th>
-                    </tr>
-                    <tr>
-                        <th>Hình ảnh</th>
-                        <th>
-                            <img src="{{ $category->getFirstMediaUrl('categories') }}" width="200" alt="{{ $category->name_vi }}">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>Chi tiết danh mục sản phẩm (VI)</th>
-                        <th>{{ $category->description_vi }}</th>
-                    </tr>
-                    <tr>
-                        <th>Chi tiết danh mục sản phẩm (EN)</th>
-                        <th>{{ $category->description_en }}</th>
-                    </tr>
-                    <tr>
-                        <th>Chi tiết danh mục sản phẩm (JP)</th>
-                        <th>{{ $category->description_jp }}</th>
+                        <th>Tên danh mục sản phẩm</th>
+                        <th>{{ $category->name }}</th>
                     </tr>
                 </tbody>
             </table>

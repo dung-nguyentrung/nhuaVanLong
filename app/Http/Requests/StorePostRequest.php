@@ -34,42 +34,16 @@ class StorePostRequest extends FormRequest
                 'required',
                 'exists:post_categories,id'
             ],
-            'name_vi' => [
+            'name' => [
                 'required',
                 'string',
                 'unique:products'
             ],
-            'name_en' => [
-                'required',
-                'string',
-                'unique:products'
-            ],
-            'name_jp' => [
-                'required',
-                'string',
-                'unique:products'
-            ],
-            'short_description_vi' => [
+            'short_description' => [
                 'required',
                 'string'
             ],
-            'short_description_en' => [
-                'required',
-                'string'
-            ],
-            'short_description_jp' => [
-                'required',
-                'string'
-            ],
-            'description_vi' => [
-                'required',
-                'string'
-            ],
-            'description_en' => [
-                'required',
-                'string'
-            ],
-            'description_jp' => [
+            'description' => [
                 'required',
                 'string'
             ],
@@ -79,15 +53,9 @@ class StorePostRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name_vi'              => 'Tên bài viết (vi)',
-            'name_en'              => 'Tên bài viết (en)',
-            'name_jp'              => 'Tên bài viết (jp)',
-            'short_description_vi' => 'Mô tả bài viết (vi)',
-            'short_description_en' => 'Mô tả bài viết (en)',
-            'short_description_jp' => 'Mô tả bài viết (jp)',
-            'description_vi'       => 'Chi tiết bài viết (vi)',
-            'description_en'       => 'Chi tiết bài viết (en)',
-            'description_jp'       => 'Chi tiết bài viết (jp)',
+            'name'              => 'Tên bài viết',
+            'short_description' => 'Mô tả bài viết',
+            'description'       => 'Chi tiết bài viết',
             'post_category_id'     => 'Danh mục bài viết'
         ];
     }
