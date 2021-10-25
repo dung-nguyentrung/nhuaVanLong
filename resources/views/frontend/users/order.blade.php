@@ -26,6 +26,7 @@
                                             <th>Địa chỉ</th>
                                             <th>Thành tiền</th>
                                             <th>Trạng thái</th>
+                                            <th>Hợp đồng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -37,6 +38,7 @@
                                             <td>{{ $order->address }}, {{ $order->ward->name }}, {{ $order->district->name }}, {{ $order->province->name }}</td>
                                             <td>{{ number_format($order->total) }} đồng</td>
                                             <td>{{ $order->status }}</td>
+                                            <td><a href="{{ route('user.contract', ['order' => $order->id]) }}" class="btn btn-primary">Xem ngay</a></td>
                                         </tr>      
                                         <tr>
                                             <th>STT</th>
@@ -46,7 +48,7 @@
                                             <th>Giá</th>
                                             <th>Tổng tiền</th>
                                         </tr> 
-                                            @foreach (App\Models\OrderItem::where('order_id', $order->id)->get() as $item)
+                                            @foreach (App\Models\OrderItem::where('order_id', $order->id)->with('product')->get() as $item)
                                                 <tr align="center">
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td><img src="{{ $item->product->getFirstMediaUrl('products') }}" alt="{{ $item->product->name }}" width="200"></td>

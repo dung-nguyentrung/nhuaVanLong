@@ -72,6 +72,7 @@ Route::prefix('user')->middleware(['auth'])->group(function () {
     Route::get('change-password', [UserController::class, 'password'])->name('user.password');
     Route::patch('change-password', [UserController::class, 'changePassword'])->name('user.password');
     Route::get('order', [UserController::class, 'order'])->name('user.order');
+    Route::get('contract/{order}', [UserController::class, 'contract'])->name('user.contract');
 });
 
 //Authentication 

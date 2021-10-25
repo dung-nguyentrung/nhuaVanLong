@@ -55,7 +55,7 @@
                             </span>
                             <div class="icon-box-content">
                                 <h4 class="icon-box-title">Địa chỉ</h4>
-                                <p>{{ $setting->address_vi }}</p>
+                                <p>{{ $setting->address }}</p>
                             </div>
                         </div>
                         <div class="swiper-slide icon-box text-center icon-box-primary">
