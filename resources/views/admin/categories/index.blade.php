@@ -32,8 +32,7 @@
                                 <label for="selectAll" class="mb-0"></label>
                             </div>
                         </th>
-                        <th>STT</th>            
-                        <th>hình ảnh</th>       
+                        <th>STT</th>           
                         <th>Tên danh mục sản phẩm</th>                        
                         <th>Hành động</th>
                     </tr>
@@ -48,9 +47,6 @@
                             </div>
                         </td>
                         <td>{{ $loop->iteration }}</td>
-                        <td>
-                            <img src="{{ $item->getFirstMediaUrl('categories') }}" width="200" alt="{{ $item->name }}">
-                        </td>
                         <td>{{ $item->name }}</td>
                         <td>
                             <div class="d-flex align-items-center list-action">

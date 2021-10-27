@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class OrderRequest extends FormRequest
 {
@@ -30,6 +31,10 @@ class OrderRequest extends FormRequest
                 'required',
                 'string'
             ],
+            'email' => [
+                'required',
+                'email'
+            ],
             'phone' => [
                 'required'
             ],
@@ -46,26 +51,26 @@ class OrderRequest extends FormRequest
                 'required'
             ],
             'subtotal' => [
-                'required'
+                Rule::when(request()->isMethod('POST'), 'required')
             ],
             'tax' => [
-                'required'
+                Rule::when(request()->isMethod('POST'), 'required')
             ],
             'shipping' => [
-                'required'
+                Rule::when(request()->isMethod('POST'), 'required')
             ],
             'total' => [
-                'required'
+                Rule::when(request()->isMethod('POST'), 'required')
             ],
             'company_name' => [
                 'required',
                 'string'
             ],
             'note' => [
-                'string'
+                Rule::when(request()->isMethod('POST'), 'required')
             ],
             'shipping_method' => [
-                'required'
+                Rule::when(request()->isMethod('POST'), 'required')
             ],
         ]; 
     }

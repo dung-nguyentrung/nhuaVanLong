@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderRequest;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
+use Brian2694\Toastr\Facades\Toastr;
 use HoangPhi\VietnamMap\Models\District;
 use HoangPhi\VietnamMap\Models\Province;
 use HoangPhi\VietnamMap\Models\Ward;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 use function PHPUnit\Framework\returnSelf;
 
@@ -21,7 +26,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('admin.orders.index');
+        $orders = Order::with(['province', 'ward', 'district', 'creator'])->get();
+        return view('admin.orders.index', compact('orders'));
     }
 
     /**
@@ -104,7 +110,9 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        abort_if(Gate::denies('order_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $items = OrderItem::where('order_id', $order->id)->with(['order', 'product'])->get();
+        return view('admin.orders.show', compact('order', 'items'));
     }
 
     /**
@@ -115,19 +123,24 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        abort_if(Gate::denies('order_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $items = OrderItem::where('order_id', $order->id)->with(['order', 'product'])->get();
+        $province = Province::where('id', '!=', $order->province->id)->get();
+        return view('admin.orders.edit', compact('order', 'items', 'province'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\OrderRequest  $request
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(OrderRequest $request, Order $order)
     {
-        //
+        $order->update($request->validated());
+        Toastr::success('Cập nhật thông tin đơn hàng thành công !', 'Thông báo');
+        return back();
     }
 
     /**
@@ -138,6 +151,14 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        abort_if(Gate::denies('order_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $order->delete();
+        return back();
+    }
+
+    public function confirm(Order $order) {
+        $order->update(['status' => Order::CONFIRMED]);
+        Toastr::success('Xác nhận đơn hàng thành công !', 'Thông báo');
+        return back();
     }
 }

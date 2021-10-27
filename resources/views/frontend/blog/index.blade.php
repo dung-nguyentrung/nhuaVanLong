@@ -1,8 +1,4 @@
 @extends('layouts.base')
-@php
-    $name = 'name_'.config('app.locale');
-    $short = 'short_description_'.config('app.locale');
-@endphp
 @section('content')
 <!-- Start of Main -->
 <main class="main">
@@ -18,18 +14,18 @@
                         <figure class="post-media br-sm">
                             <a href="post-single.html">
                                 <img src="{{ $post->getFirstMediaUrl('posts', 'thumb') }}" width="930"
-                                    height="500" alt="{{ $post->$name }}">
+                                    height="500" alt="{{ $post->name }}">
                             </a>
                         </figure>
                         <div class="post-details">
                             <div class="post-cats text-primary">
-                                <a href="{{ route('posts.category',['postCategory' => $post->postCategory->$name ]) }}">{{ $post->postCategory->$name }}</a>
+                                <a href="{{ route('posts.category',['postCategory' => $post->postCategory->name ]) }}">{{ $post->postCategory->name }}</a>
                             </div>
                             <h4 class="post-title">
-                                <a href="{{ route('posts.detail', ['post' => $post->slug]) }}">{{ $post->$name }}</a>
+                                <a href="{{ route('posts.detail', ['post' => $post->slug]) }}">{{ $post->name }}</a>
                             </h4>
                             <div class="post-content">
-                                <p>{{ $post->$short }}</p>
+                                <p>{{ $post->short_description }}</p>
                                 <a href="{{ route('posts.detail', ['post' => $post->slug]) }}" class="btn btn-link btn-primary">(xem thêm)</a>
                             </div>
                             <div class="post-meta">

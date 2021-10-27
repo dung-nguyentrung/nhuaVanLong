@@ -18,6 +18,10 @@ class Order extends Model
 {
     use HasFactory, SoftDeletes, Userstamps;
 
+    const PENDING = "Đang chờ xử lý";
+    const CONFIRMED = "Xác nhận";
+    const LIQUIDATION = "Đã xử lý";
+
     protected $table = 'orders';
 
     protected $fillable = [

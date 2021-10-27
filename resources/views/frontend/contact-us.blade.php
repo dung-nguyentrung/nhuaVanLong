@@ -32,8 +32,8 @@
                 }">
                     <div class="swiper-wrapper row cols-xl-4 cols-md-3 cols-sm-2 cols-1">
                         <div class="swiper-slide icon-box text-center icon-box-primary">
-                            <span class="icon-box-icon icon-email">
-                                <i class="w-icon-envelop-closed"></i>
+                            <span class="text-primary" style="font-size: 20px;"> 
+                                <i class="fa fa-envelope"></i>
                             </span>
                             <div class="icon-box-content">
                                 <h4 class="icon-box-title">Địa chỉ email</h4>
@@ -41,8 +41,8 @@
                             </div>
                         </div>
                         <div class="swiper-slide icon-box text-center icon-box-primary">
-                            <span class="icon-box-icon icon-headphone">
-                                <i class="w-icon-headphone"></i>
+                            <span class="text-primary" style="font-size: 20px;"> 
+                                <i class="fa fa-headphones" aria-hidden="true"></i>
                             </span>
                             <div class="icon-box-content">
                                 <h4 class="icon-box-title">Điện thoại</h4>
@@ -50,8 +50,8 @@
                             </div>
                         </div>
                         <div class="swiper-slide icon-box text-center icon-box-primary">
-                            <span class="icon-box-icon icon-map-marker">
-                                <i class="w-icon-map-marker"></i>
+                            <span class="text-primary" style="font-size: 20px;"> 
+                                <i class="fas fa-map-marker" aria-hidden="true"></i>
                             </span>
                             <div class="icon-box-content">
                                 <h4 class="icon-box-title">Địa chỉ</h4>
@@ -59,8 +59,8 @@
                             </div>
                         </div>
                         <div class="swiper-slide icon-box text-center icon-box-primary">
-                            <span class="icon-box-icon icon-fax">
-                                <i class="w-icon-fax"></i>
+                            <span class="text-primary" style="font-size: 20px;"> 
+                                <i class="fa fa-fax"></i>
                             </span>
                             <div class="icon-box-content">
                                 <h4 class="icon-box-title">Fax</h4>

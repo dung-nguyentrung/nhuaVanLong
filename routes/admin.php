@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\{
     TestimonialController
 };
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 //Permissions
 Route::delete('permissions/massDestroy', [PermissionController::class, 'massDestroy']);
@@ -42,7 +42,8 @@ Route::delete('products/{product}/forceDelete', [ProductController::class, 'forc
 Route::get('orders/province/{id}', [OrderController::class, 'province'])->name('orders.sortByProvince');
 Route::get('orders/district/{id}', [OrderController::class, 'district'])->name('orders.sortByDistrict');
 Route::get('orders/search', [OrderController::class, 'search'])->name('orders.search');
-Route::resource('orders', OrderController::class);
+Route::patch('order/confirm/{order}', [OrderController::class, 'confirm'])->name('orders.confirm');
+Route::resource('orders', OrderController::class)->except(['store', 'create']);
 
 //Post Categories
 Route::delete('post_categories/massDestroy', [PostCategoryController::class, 'massDestroy']);

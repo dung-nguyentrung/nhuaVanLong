@@ -152,7 +152,7 @@
                                     <ul class="menu vertical-menu category-menu">
                                         @foreach ($categories as $category)
                                         <li>
-                                            <a href="">
+                                            <a href="{{ route('products.category', ['category' => $category->slug]) }}">
                                                 <i class="fa fa-dot-circle"></i>{{ $category->name }}
                                             </a>
                                         </li>                                                                                    

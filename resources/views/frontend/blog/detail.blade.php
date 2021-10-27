@@ -1,12 +1,8 @@
 @extends('layouts.base')
-@php
-    $name = 'name_'.config('app.locale');
-    $desc = 'description_'.config('app.locale')
-@endphp
 @section('content')
 <!-- Start of Main -->
 <main class="main">
-    <x-page-header title="{{ $post->$name }}"></x-page-header>
+    <x-page-header title="{{ $post->name }}"></x-page-header>
 
     <!-- Start of Page Content -->
     <div class="page-content mb-8">
@@ -15,7 +11,7 @@
                 <div class="main-content post-single-content">
                     <div class="post post-grid post-single">
                         <figure class="post-media br-sm">
-                            <img src="{{ $post->getFirstMediaUrl('posts','thumb') }}" alt="{{ $post->$name }}" width="930" height="500" />
+                            <img src="{{ $post->getFirstMediaUrl('posts','thumb') }}" alt="{{ $post->name }}" width="930" height="500" />
                         </figure>
                         <div class="post-details">
                             <div class="post-meta">
@@ -23,16 +19,16 @@
                                 - <span class="post-date">{{ $post->created_at->format('d.m.Y') }}</span>
                                 {{-- <span class="post-comment"><i class="w-icon-comments"></i><span>0</span>Comments</span> --}}
                             </div>
-                            <h2 class="post-title">{{ $post->$name }}</h2>
+                            <h2 class="post-title">{{ $post->name }}</h2>
                             <div class="post-content">
-                                {!! $post->$desc !!}
+                                {!! $post->description !!}
                             </div>
                         </div>
                     </div>
                     <div class="tags">
                         <label class="text-dark mr-2">Chủ đề:</label>
                         @foreach ($post->tags as $tag)
-                        <a href="{{ route('posts.tag', ['tag' => $tag->slug]) }}" class="tag">{{ $tag->$name }}</a>                            
+                        <a href="{{ route('posts.tag', ['tag' => $tag->slug]) }}" class="tag">{{ $tag->name }}</a>                            
                         @endforeach
                     </div>
                     <!-- End Tag -->
@@ -81,7 +77,7 @@
                                 <div class="swiper-slide post post-grid">
                                     <figure class="post-media br-sm">
                                         <a href="{{ route('posts.detail', ['post' => $post->slug]) }}">
-                                            <img src="{{ $post->getFirstMediaUrl('posts', 'thumb') }}" alt="{{ $post->$name }}" width="296"
+                                            <img src="{{ $post->getFirstMediaUrl('posts', 'thumb') }}" alt="{{ $post->name }}" width="296"
                                                 height="190" style="background-color: #bcbcb4;" />
                                         </a>
                                     </figure>
@@ -90,7 +86,7 @@
                                             bởi <a class="post-author">{{ $post->creator->name }}</a>
                                             - <a class="post-date">{{ $post->created_at->format('d.m.Y') }}</a>
                                         </div>
-                                        <h4 class="post-title mb-3"><a href="{{ route('posts.detail', ['post' => $post->slug]) }}">{{ $post->$name }}</a></h4>
+                                        <h4 class="post-title mb-3"><a href="{{ route('posts.detail', ['post' => $post->slug]) }}">{{ $post->name }}</a></h4>
                                     </div>
                                 </div>                                    
                                 @endforeach

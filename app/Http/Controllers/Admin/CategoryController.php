@@ -21,7 +21,7 @@ class CategoryController extends Controller
     public function index()
     {
         abort_if(Gate::denies('category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $categories = Category::with('media')->get();
+        $categories = Category::all();
 
         return view('admin.categories.index', compact('categories'));
     }
