@@ -109,10 +109,14 @@
             <div class="card card-block card-stretch card-height-helf">
                 <div class="card-body card-item-right">
                     <div class="d-flex align-items-top">
+                        <div class="bg-warning-light rounded">
+                            <img src="{{ $item->getFirstMediaUrl('products') }}" class="style-img img-fluid m-auto"
+                                alt="{{ $item->name }}">
+                        </div>
                         <div class="style-text text-left">
                             <h5 class="mb-2">{{ $item->name }}</h5>
-                            <p class="mb-2">Số lượng bán ra : {{ $item->max }} sản phẩm</p>
-                            <p class="mb-0">Tổng tiền: {{ number_format($item->max * $item->price) }} đồng</p>
+                            <p class="mb-2">Số lượng bán ra : {{ $item->qty }} sản phẩm</p>
+                            <p class="mb-0">Tổng tiền: {{ number_format($item->qty * $item->price) }} đồng</p>
                         </div>
                     </div>
                 </div>

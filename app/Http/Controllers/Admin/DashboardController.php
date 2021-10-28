@@ -20,13 +20,7 @@ class DashboardController extends Controller
         $product_sold = OrderItem::sum('quantity');
         $feature_products = Product::orderBy('view', 'DESC')->limit(4)->get();
 
-        $most_sold_products = OrderItem
-            ::join('products', 'products.id', '=', 'order_items.product_id')
-            ->selectRaw('products.*, max(order_items.quantity) as max')
-            ->groupBy('products.id')
-            ->orderBy('quantity', 'desc')
-            ->take(2)
-            ->get();
+        $most_sold_products = $this->getHotProduct();
 
         $data = $this->getRevenueYear();
 
@@ -51,5 +45,17 @@ class DashboardController extends Controller
         }
 
         return $data;
+    }
+
+    public function getHotProduct() {
+        $products = Product::with('media')
+        ->leftJoin('order_items','products.id','=','order_items.product_id')
+        ->selectRaw('products.*, COALESCE(sum(order_items.quantity),0) qty')
+        ->groupBy('products.id')
+        ->orderBy('qty','desc')
+        ->take(2)
+        ->get();
+
+        return $products;
     }
 }
