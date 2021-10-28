@@ -15,9 +15,6 @@
                     @can('order_delete')                        
                     <a href="#" id="deleteAll" class="btn btn-danger add-list"><i class="las la-trash"></i>Xóa lựa chọn</a>
                     @endcan
-                    @can('order_create')
-                    <a href="{{ route('orders.create') }}" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm danh mục sản phẩm</a>                        
-                    @endcan
                 </div>
             </div>
         </div>
@@ -64,10 +61,16 @@
                                 <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="Xem chi tiết" data-original-title="View"
                                     href="{{ route('orders.show',['order' => $item->id]) }}"><i class="fa fa-eye mr-0"></i></a>                                    
                                 @endcan
+                                
                                 @can('order_edit')
                                 <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="Cập nhật" data-original-title="Edit"
                                     href="{{ route('orders.edit',['order' => $item->id]) }}"><i class="fa fa-pen mr-0"></i></a>                                    
-                                    @endcan
+                                @endcan
+                                @can('order_receipt')
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#receipt{{ $item->id }}">
+                                    <i class="fas fa-money-check"></i>
+                                </button>                                    
+                                @endcan
                                 @can('order_delete')
                                 <form action="{{ route('orders.destroy',['order' => $item->id]) }}" method="POST">
                                     @csrf
@@ -84,11 +87,54 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+@foreach ($orders as $item)
+<div class="modal fade" id="receipt{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="receiptLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="receiptLabel">Công nợ đơn hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('receipt.debt', ['receipt' => $item->receipt->id]) }}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label>Tổng tiền đơn hàng</label>
+                        <input type="text" class="form-control total" name="total" value="{{ $item->receipt->total }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Đã trả</label>
+                        <input type="text" class="form-control paid" name="paid" value="{{ $item->receipt->paid }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Còn nợ</label>
+                        <input type="text" class="form-control in_debt" name="in_debt" value="{{ $item->receipt->in_debt }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Xác nhận</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 @endsection
 
 @push('scripts')
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-    {!! Toastr::message() !!}    
+    {!! Toastr::message() !!}   
+    <script>
+        $(document).ready(function () {
+            $('.paid').keyup(function () { 
+                let paid = $(this).val();
+                let total = $('.total').val();    
+                let in_debt = total - paid;
+                $('.in_debt').val(in_debt);
+            });
+        });    
+    </script> 
     @can('order_delete')
         <script>
             $(document).ready(function () {

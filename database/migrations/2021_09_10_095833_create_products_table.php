@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('color');
             $table->decimal('capacity')->default(0);
             $table->string('cycle');
+            $table->integer('view')->default(0);
             $table->integer('quantity')->default(0);
             $table->decimal('price', 18, 2);
             $table->text('short_description');

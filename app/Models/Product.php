@@ -74,13 +74,13 @@ class Product extends Model implements HasMedia
     }
 
     public function handleUploadFile($image, $drawing) {
-        if (!is_null($image)) {
+        if (!empty($image)) {
             $this->addMedia($image)
                 ->usingFileName($this->slug)
                 ->toMediaCollection('products');
         }
 
-        if (!is_null($drawing)) {
+        if (!empty($drawing)) {
             $this->addMedia($drawing)
                 ->usingFileName($this->slug)
                 ->toMediaCollection('product_drawing');
@@ -88,7 +88,7 @@ class Product extends Model implements HasMedia
     }
 
     public function handleUpdateFile($image, $drawing) {
-        if (!is_null($image)) {
+        if (!empty($image)) {
             if ($this->getFirstMedia('products')) {
                 $this->getFirstMedia('products')->delete();
             }
@@ -97,7 +97,7 @@ class Product extends Model implements HasMedia
                 ->toMediaCollection('products');
         }
 
-        if (!is_null($drawing)) {
+        if (!empty($drawing)) {
             if($this->getFirstMedia('product_drawing')) {
                 $this->getFirstMedia('product_drawing')->delete();
             }

@@ -16,6 +16,7 @@ class ProductController extends Controller
     }
 
     public function detail(Product $product) {
+        $product->increment('view');
         $related_products = Product::getProductByCategory($product->category_id)->get();
         $random_products = Product::getRandomProduct()->get();
         return view('frontend.shop.detail', compact('product', 'related_products', 'random_products'));

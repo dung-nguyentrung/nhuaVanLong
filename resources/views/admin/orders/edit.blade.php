@@ -86,6 +86,39 @@
             <button type="submit" class="btn btn-primary">Xác nhận</button>
         </div>
     </form>
+    <h5 class="mt-5">Chi tiết đơn hàng</h5>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Sản phẩm</th>
+                <th>Số lượng</th>
+                <th></th>
+                <th>Đơn giá</th>
+                <th>Tổng tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($items as $item)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $item->product->name }}</td>
+                <form action="{{ route('orders.item.update', ['orderItem' => $item->id]) }}" method="post">
+                    @csrf
+                    @method('patch')
+                <td>
+                    <input type="number" name="quantity" width="30" class="form-control" value="{{ $item->quantity }}">
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-arrow-up"></i></button>
+                </td>
+                </form>
+                <td>{{ number_format($item->price) }} đồng</td>
+                <td>{{ number_format($item->quantity * $item->price) }} đồng</td>
+            </tr>                
+            @endforeach
+        </tbody>
+    </table>
 </div>
 @endsection
 @push('scripts')

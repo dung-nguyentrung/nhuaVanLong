@@ -7,6 +7,7 @@ use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\Receipt;
 use Brian2694\Toastr\Facades\Toastr;
 use HoangPhi\VietnamMap\Models\District;
 use HoangPhi\VietnamMap\Models\Province;
@@ -26,19 +27,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['province', 'ward', 'district', 'creator'])->get();
+        $orders = Order::with(['province', 'ward', 'district', 'creator', 'receipt'])->get();
         return view('admin.orders.index', compact('orders'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {   $province = Province::all();
-        $products = Product::select('id', 'name')->with('media')->limit(12)->get();
-        return view('admin.orders.create', compact('products', 'province'));
     }
 
     public function search () {
@@ -89,17 +79,6 @@ class OrderController extends Controller
             }
         }
         return response()->json($output);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -159,6 +138,18 @@ class OrderController extends Controller
     public function confirm(Order $order) {
         $order->update(['status' => Order::CONFIRMED]);
         Toastr::success('Xác nhận đơn hàng thành công !', 'Thông báo');
+        return back();
+    }
+
+    public function updateItem(Request $request, OrderItem $orderItem) {
+        $orderItem->update(['quantity' => $request->quantity]);
+        Toastr::success('Cập nhật số lượng đơn hàng thành công !','Thông báo');
+        return back();
+    }
+
+    public function debt(Request $request, Receipt $receipt) {
+        $receipt->update($request->all());
+        Toastr::success('Cập nhật công nợ thành công !', 'Thông báo');
         return back();
     }
 }

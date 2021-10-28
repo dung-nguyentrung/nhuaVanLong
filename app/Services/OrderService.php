@@ -29,7 +29,7 @@ class OrderService
         $receipt->order_id = $order->id;
         $receipt->total = request()->total;
         $receipt->paid = 0;
-        $receipt->in_debt = 0;
+        $receipt->in_debt = request()->total;
         $receipt->save();
 
         Cart::instance('cart')->destroy();

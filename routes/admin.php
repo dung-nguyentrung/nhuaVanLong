@@ -42,8 +42,12 @@ Route::delete('products/{product}/forceDelete', [ProductController::class, 'forc
 Route::get('orders/province/{id}', [OrderController::class, 'province'])->name('orders.sortByProvince');
 Route::get('orders/district/{id}', [OrderController::class, 'district'])->name('orders.sortByDistrict');
 Route::get('orders/search', [OrderController::class, 'search'])->name('orders.search');
-Route::patch('order/confirm/{order}', [OrderController::class, 'confirm'])->name('orders.confirm');
+Route::patch('orders/confirm/{order}', [OrderController::class, 'confirm'])->name('orders.confirm');
+Route::patch('orders/item/{orderItem}', [OrderController::class, 'updateItem'])->name('orders.item.update');
 Route::resource('orders', OrderController::class)->except(['store', 'create']);
+
+//Receipt
+Route::post('receipts/debt/{receipt}', [OrderController::class, 'debt'])->name('receipt.debt');
 
 //Post Categories
 Route::delete('post_categories/massDestroy', [PostCategoryController::class, 'massDestroy']);
