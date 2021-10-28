@@ -137,6 +137,20 @@ class OrderController extends Controller
 
     public function confirm(Order $order) {
         $order->update(['status' => Order::CONFIRMED]);
+
+        $items = OrderItem::where('order_id', $order->id)->get();
+        foreach ($items as $item) {
+            $product = Product::where('id', $item->product_id)->first();
+            if ($product->quantity >= $item->quantity) {
+                $product->quantity = $product->quantity - $item->quantity;
+                $product->save();
+            }
+            else{
+                Toastr::error('Xin lỗi ! Số lượng sản phẩm trong kho không đủ', 'Lỗi');
+                return back();
+            }
+        }
+
         Toastr::success('Xác nhận đơn hàng thành công !', 'Thông báo');
         return back();
     }
