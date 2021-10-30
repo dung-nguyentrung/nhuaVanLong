@@ -22,6 +22,8 @@ Route::delete('roles/massDestroy', [RoleController::class, 'massDestroy']);
 Route::resource('roles', RoleController::class);
 
 //Users 
+Route::get('users/password', [UserController::class, 'password'])->name('users.password');
+Route::patch('users/password', [UserController::class, 'change'])->name('users.password');
 Route::delete('users/massDestroy', [UserController::class, 'massDestroy']);
 Route::resource('users', UserController::class);
 

@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyUserRequest;
+use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
@@ -115,5 +119,17 @@ class UserController extends Controller
         User::destroy(request('ids'));
         
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function password(){
+        return view('admin.users.password');
+    }
+
+    public function change(PasswordRequest $request) {
+        if ($request->validated()) {
+            User::find(Auth::user()->id)->update(['password' => Hash::make($request->password)]);
+            Toastr::success('Đổi mật khẩu thành công','Thông báo');
+        }
+        return back();
     }
 }

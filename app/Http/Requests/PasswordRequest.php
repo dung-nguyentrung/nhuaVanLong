@@ -59,4 +59,9 @@ class PasswordRequest extends FormRequest
             'min' => ':attribute không được ít hơn 8 ký tự'
         ];
     }
+
+    protected function failedValidation(Validator $validator)
+    {
+        Toastr::error($validator->errors()->first(), 'Lỗi', ['timeOut' => 10000]);
+    }
 }

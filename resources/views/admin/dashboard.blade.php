@@ -22,7 +22,7 @@
                                     <img src="{{ asset('admin/assets/images/icons/sales.png') }}" class="img-fluid" alt="image">
                                 </div>
                                 <div>
-                                    <p class="mb-2">Doanh số</p>
+                                    <p class="mb-2">Doanh số tháng {{ date('m') }}</p>
                                     <h4>{{ number_format($sale) }} đồng</h4>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                     <img src="{{ asset('admin/assets/images/icons/money.png') }}" class="img-fluid" alt="image">
                                 </div>
                                 <div>
-                                    <p class="mb-2">Doanh thu</p>
+                                    <p class="mb-2">Doanh thu tháng {{ date('m') }}</p>
                                     <h4>{{ number_format($revenue) }} đồng</h4>
                                 </div>
                             </div>

@@ -30,8 +30,7 @@
                             <div class="col-md-6 form-group">
                                     <label>Tên bài viết</label>
                                     <input type="text" name="name" class="form-control" placeholder="Nhập tên bài viết">                                                         
-                            </div>                                 
-                            @endforeach
+                            </div>    
                             <div class="col-md-3 form-group">
                                 <label>Hình ảnh</label><br/>
                                 <input type="file" name="image" required onchange="loadPreview(this);">

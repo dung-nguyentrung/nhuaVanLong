@@ -157,6 +157,12 @@
                             </a>
                         </li>                            
                         @endcan
+                        <li class="">
+                            <a href="{{ route('users.password') }}">
+                                <img src="{{ asset('admin/assets/images/icons/password.png') }}" class="icon-left-bar" alt="Role">
+                                <span class="ml-4">Đổi mật khẩu</span>
+                            </a>
+                        </li> 
                     </ul>
                 </nav>
                 <div class="p-3"></div>

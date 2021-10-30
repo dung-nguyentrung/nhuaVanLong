@@ -29,8 +29,10 @@ class UserController extends Controller
     }
 
     public function changePassword(PasswordRequest $request) {
-        User::find(Auth::user()->id)->update(['password' => Hash::make($request->password)]);
-        Toastr::success('Đổi mật khẩu thành công !', 'Thông báo');
+        if ($request->validated()) {
+            User::find(Auth::user()->id)->update(['password' => Hash::make($request->password)]);
+            Toastr::success('Đổi mật khẩu thành công !', 'Thông báo');
+        }
         return back();
     }
 
