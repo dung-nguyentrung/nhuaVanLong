@@ -61,31 +61,12 @@
                         <p class="welcome-msg">Chào mừng đến với nhựa Vân Long!</p>
                     </div>
                     <div class="header-right pr-0">
-                        <!-- End of DropDown Menu -->
-
-                        <div class="dropdown">
-                            <a href="#language"><img src="{{ asset('assets/images/flags/eng.png')}}" alt="ENG Flag"
-                                    width="14" height="8" class="dropdown-image" /> ENG</a>
-                            <div class="dropdown-box">
-                                <a href="#ENG">
-                                    <img src="{{ asset('assets/images/flags/eng.png')}}" alt="ENG Flag" width="14" height="8"
-                                        class="dropdown-image" />
-                                    ENG
-                                </a>
-                                <a href="#FRA">
-                                    <img src="{{ asset('assets/images/flags/fra.png')}}" alt="FRA Flag" width="14" height="8"
-                                        class="dropdown-image" />
-                                    FRA
-                                </a>
-                            </div>
-                        </div>
-                        <!-- End of Dropdown Menu -->
                         <span class="divider d-lg-show"></span>
                         <a href="/blogs" class="d-lg-show">Tin tức</a>
                         <a href="/contact-us" class="d-lg-show">Liên hệ</a>
                         @if(Route::has('login'))
                             @auth
-                            <a href="/" class="d-lg-show">Tài khoản của tôi</a>
+                            <a href="{{ route('user.dashboard') }}" class="d-lg-show">Tài khoản của tôi</a>
                             @else
                             <a href="{{ route('login') }}" class="d-lg-show login sign-in"><i
                                     class="w-icon-account"></i>Đăng nhập</a>
@@ -128,7 +109,7 @@
                     </div>
                     <div class="header-right ml-4">
                         <div class="header-call d-xs-show d-lg-flex align-items-center">
-                            <a href="tel:#" class="w-icon-call"></a>
+                            <a href="tel:{{ $setting->phone }}"><i class="fa fa-phone mr-2" style="font-size: 20px"></i></a>
                             <div class="call-info d-xl-show">
                                 <span>Gọi ngay</span>
                                 <h4 class="chat font-weight-normal font-size-md text-normal ls-normal text-light mb-0">

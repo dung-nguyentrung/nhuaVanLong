@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Receipt;
+use App\Models\Setting;
 use Brian2694\Toastr\Facades\Toastr;
 use HoangPhi\VietnamMap\Models\District;
 use HoangPhi\VietnamMap\Models\Province;
@@ -165,5 +166,10 @@ class OrderController extends Controller
         $receipt->update($request->all());
         Toastr::success('Cập nhật công nợ thành công !', 'Thông báo');
         return back();
+    }
+
+    public function contract(Order $order) {
+        $setting = Setting::first();
+        return view('admin.orders.contract', compact('order', 'setting'));
     }
 }

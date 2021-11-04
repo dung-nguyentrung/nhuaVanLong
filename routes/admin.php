@@ -41,6 +41,7 @@ Route::post('products/{product}/restore', [ProductController::class, 'restore'])
 Route::delete('products/{product}/forceDelete', [ProductController::class, 'forceDelete'])->name('products.forceDelete');
 
 //Orders
+Route::get('orders/contract/{order}', [OrderController::class, 'contract'])->name('orders.contract');
 Route::get('orders/province/{id}', [OrderController::class, 'province'])->name('orders.sortByProvince');
 Route::get('orders/district/{id}', [OrderController::class, 'district'])->name('orders.sortByDistrict');
 Route::get('orders/search', [OrderController::class, 'search'])->name('orders.search');

@@ -96,10 +96,6 @@ class CartController extends Controller
         $order = $service->storeNewOrder($request->validated(), $request->products);        
 
         Toastr::success('Đặt hàng thành công', 'Thông báo');
-        return redirect()->route('thankyou');
-    }
-
-    public function thankyou() {
-        return view('frontend.shop.thankyou');
+        return redirect()->route('home');
     }
 }

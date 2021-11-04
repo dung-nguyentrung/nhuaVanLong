@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Testimonial;
 use Illuminate\Support\Facades\Session;
@@ -12,7 +13,10 @@ use Illuminate\Support\Facades\Session;
 class HomeController extends Controller
 {
     public function index() {
-        return view('frontend.home');
+        $categories = Category::all();
+        $products = Product::with(['media', 'category'])->paginate('12');
+        $posts = Post::with(['media', 'post_category'])->paginate(4);
+        return view('frontend.home', compact('categories', 'products', 'posts'));
     }
 
     public function about() {

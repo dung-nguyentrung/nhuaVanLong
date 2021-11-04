@@ -13,6 +13,7 @@
                     <h4 class="mb-3">Đơn hàng</h4>
                 </div>
                 <div>
+                    <a href="{{ route('orders.contract', ['order' => $order->id]) }}" class="btn btn-success add-list">Hợp đồng</a>
                     @can('order_edit')
                     <a href="{{ route('orders.edit', ['order' => $order->id]) }}" class="btn btn-success add-list">Cập nhật đơn hàng</a>
                     @endcan

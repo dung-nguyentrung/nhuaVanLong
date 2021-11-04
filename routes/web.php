@@ -48,7 +48,6 @@ Route::post('cart/destroy', [CartController::class, 'destroyCart'])->name('cart.
 Route::middleware(['auth'])->group(function () {
     Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::post('order-products', [CartController::class, 'order'])->name('order.confirm');
-    Route::get('thankyou', [CartController::class, 'thankyou'])->name('thankyou');
 });
 //
 Route::get('purchase-policy', [PolicyController::class, 'purchase'])->name('policy.purchase');
