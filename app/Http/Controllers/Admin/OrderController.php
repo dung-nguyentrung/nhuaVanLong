@@ -163,7 +163,17 @@ class OrderController extends Controller
     }
 
     public function debt(Request $request, Receipt $receipt) {
-        $receipt->update($request->all());
+        if ($receipt->total >= $receipt->paid + $request->paid)
+        {
+            $receipt->in_debt = $receipt->in_debt - ($receipt->paid + $request->paid);
+        }
+        else
+        {
+            $receipt->in_debt = 0;
+            $receipt->refund = ($receipt->paid + $request->paid) - $receipt->total;
+        }
+        $receipt->paid = $receipt->paid + $request->paid;
+        $receipt->save();
         Toastr::success('Cập nhật công nợ thành công !', 'Thông báo');
         return back();
     }
@@ -171,5 +181,16 @@ class OrderController extends Controller
     public function contract(Order $order) {
         $setting = Setting::first();
         return view('admin.orders.contract', compact('order', 'setting'));
+    }
+
+    public function sorting(Request $request)
+    {
+        if (is_null($request->value)) {
+            $orders = Order::with(['province', 'ward', 'district', 'creator', 'receipt'])->get();
+        }else{
+            $orders = Order::with(['province', 'ward', 'district', 'creator', 'receipt'])
+            ->where('status', $request->value)->get();
+        }
+        return response()->json(['view' => view('admin.orders.list-order', compact('orders'))->render()]);
     }
 }

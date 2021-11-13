@@ -27,19 +27,19 @@
                         <div class="row gutter-sm">
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label>Họ và tên *</label>
+                                    <label>Họ và tên (<span style="color: red">*</span>)</label>
                                     <input type="text" class="form-control form-control-md" name="name"
                                         required placeholder="Nguyễn Văn A">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Tên công ty</label>
+                            <label>Tên công ty (<span style="color: red">*</span>)</label>
                             <input type="text" class="form-control form-control-md" name="company_name" placeholder="Công ty ABC">
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Tỉnh / Thành phố</label>
+                                <label>Tỉnh / Thành phố (<span style="color: red">*</span>)</label>
                                 <select name="province_id" id="province" class="form-control">
                                     <option value="">-- Chọn --</option>
                                     @foreach ($provinces as $province)
@@ -50,7 +50,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Quận / Huyện</label>
+                                <label>Quận / Huyện (<span style="color: red">*</span>)</label>
                                 <select name="district_id" id="district" class="form-control">
                                     <option value="">-- Chọn --</option>
                                 </select>
@@ -58,19 +58,19 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Phường / Xã</label>
+                                <label>Phường / Xã (<span style="color: red">*</span>)</label>
                                 <select name="ward_id" id="ward" class="form-control">
                                     <option value="">-- Chọn --</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Địa chỉ cụ thể*</label>
+                            <label>Địa chỉ cụ thể (<span style="color: red">*</span>)</label>
                             <input type="text"
                                 class="form-control form-control-md mb-2" name="address" placeholder="Số 4, Lý Tự Trọng" required>
                         </div>
                         <div class="form-group mb-7">
-                            <label>Địa chỉ email *</label>
+                            <label>Địa chỉ email (<span style="color: red">*</span>)</label>
                             <input type="email" class="form-control form-control-md" placeholder="khachhang@vanlongplastic.com.vn" name="email" required>
                             <input type="hidden" name="tax" value="{{ Cart::tax(0,'','') }}">
                             <input type="hidden" name="shipping" value="0">
@@ -78,7 +78,7 @@
                             <input type="hidden" name="total" value="{{ Cart::total(0,'','') }}">
                         </div>
                         <div class="form-group mb-7">
-                            <label>Điện thoại *</label>
+                            <label>Điện thoại (<span style="color: red">*</span>)</label>
                             <input type="text" class="form-control form-control-md" placeholder="0123456789" name="phone" required>
                         </div>
                         <div class="form-group mt-3">
@@ -88,7 +88,7 @@
                                 placeholder="Ghi chú cho đơn hàng của bạn"></textarea>
                         </div>
                         <div class="col-lg-12">
-                            <input type="checkbox" name="agree" id="agreePolicy">
+                            <input type="checkbox" name="agree" id="agreePolicy" required>
                             <label for="agreePolicy">Đồng ý với <a href="/purchase-policy">chính sách mua hàng</a> của chúng tôi</label>
                         </div>
                     </div>

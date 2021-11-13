@@ -18,6 +18,7 @@ class CreateReceiptsTable extends Migration
             $table->decimal('total', 18, 2);
             $table->decimal('paid', 18, 2)->default(0);
             $table->decimal('in_debt', 18, 2)->default(0);
+            $table->decimal('refund', 18, 2)->default(0);
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

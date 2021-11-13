@@ -20,42 +20,26 @@
                                 <table class="table table-striped" border="1px">
                                     <thead>
                                         <tr>
-                                            <th>Mã Đơn hàng</th>
-                                            <th>Khách hàng</th>
-                                            <th>Điện thoại</th>
-                                            <th>Địa chỉ</th>
-                                            <th>Thành tiền</th>
-                                            <th>Trạng thái</th>
-                                            <th>Hợp đồng</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($orders as $order)
-                                        <tr align="center">
-                                            <td>DHVL{{ $order->id }}</td>
-                                            <td>{{ $order->name }}</td>
-                                            <td>{{ $order->phone }}</td>
-                                            <td>{{ $order->address }}, {{ $order->ward->name }}, {{ $order->district->name }}, {{ $order->province->name }}</td>
-                                            <td>{{ number_format($order->total) }} đồng</td>
-                                            <td>{{ $order->status }}</td>
-                                            <td><a href="{{ route('user.contract', ['order' => $order->id]) }}" class="btn btn-primary">Xem ngay</a></td>
-                                        </tr>      
-                                        <tr>
-                                            <th>STT</th>
+                                            <th>Mã đơn hàng</th>
                                             <th>Hình ảnh</th>
                                             <th>Tên sản phẩm</th>
                                             <th>Số lượng</th>
                                             <th>Giá</th>
                                             <th>Tổng tiền</th>
-                                        </tr> 
+                                            <td>Ngày đặt hàng</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($orders as $order)                                              
                                             @foreach (App\Models\OrderItem::where('order_id', $order->id)->with('product')->get() as $item)
                                                 <tr align="center">
-                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>Đơn hàng: #{{ $order->id }}</td>
                                                     <td><img src="{{ $item->product->getFirstMediaUrl('products') }}" alt="{{ $item->product->name }}" width="200"></td>
                                                     <td>{{ $item->product->name }}</td>
                                                     <td>{{ $item->quantity }} sản phẩm</td>
                                                     <td>{{ number_format($item->price) }} đồng/sản phẩm</td>
                                                     <td>{{ number_format($item->quantity * $item->price) }} đồng</td>
+                                                    <td>{{ $order->created_at->format('d/m/y') }}</td>
                                                 </tr>
                                             @endforeach                                 
                                         @endforeach

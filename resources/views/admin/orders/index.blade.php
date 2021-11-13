@@ -19,125 +19,48 @@
             </div>
         </div>
         <div class="col-lg-12">
-            <div class="table-responsive rounded mb-3">
-            <table class="data-table table mb-0 tbl-server-info">
-                <thead class="bg-white text-uppercase">
-                    <tr class="ligth ligth-data">
-                        <th>
-                            <div class="checkbox d-inline-block">
-                                <input type="checkbox" class="checkbox-input" id="selectAll">
-                                <label for="selectAll" class="mb-0"></label>
-                            </div>
-                        </th>
-                        <th>STT</th>           
-                        <th>Tên khách hàng</th>
-                        <th>Điện thoại</th>                        
-                        <th>Địa chỉ</th>
-                        <th>Tổng tiền</th>
-                        <th>Ngày đặt hàng</th>
-                        <th>Trạng thái</th>
-                        <th>Hành động</th>
-                    </tr>
-                </thead>                
-                <tbody class="ligth-body">
-                    @foreach ($orders as $item)
-                    <tr>
-                        <td>
-                            <div class="checkbox d-inline-block">
-                                <input type="checkbox" value="{{ $item->id }}" class="checkbox-input" name="ids">
-                                <label for="ids" class="mb-0"></label>
-                            </div>
-                        </td>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->name }}</td>
-                        <td>{{ $item->phone }}</td>
-                        <td>{{ $item->address }}, {{ $item->ward->name }}, {{ $item->district->name }}, {{ $item->province->name }}</td>
-                        <td>{{ number_format($item->total) }} đồng</td>
-                        <td>{{ $item->created_at->format('d/m/Y') }}</td>
-                        <td>{{ $item->status }}</td>
-                        <td>
-                            <div class="d-flex align-items-center list-action">
-                                @can('order_show')
-                                <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="Xem chi tiết" data-original-title="View"
-                                    href="{{ route('orders.show',['order' => $item->id]) }}"><i class="fa fa-eye mr-0"></i></a>                                    
-                                @endcan
-                                
-                                @can('order_edit')
-                                <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="Cập nhật" data-original-title="Edit"
-                                    href="{{ route('orders.edit',['order' => $item->id]) }}"><i class="fa fa-pen mr-0"></i></a>                                    
-                                @endcan
-                                @can('order_receipt')
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#receipt{{ $item->id }}">
-                                    <i class="fas fa-money-check"></i>
-                                </button>                                    
-                                @endcan
-                                @can('order_delete')
-                                <form action="{{ route('orders.destroy',['order' => $item->id]) }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn btn-danger" title="Xóa" type="submit"><i class="fa fa-trash-alt mr-0"></i></button>
-                                </form>                                    
-                                @endcan
-                            </div>
-                        </td>
-                    </tr>                        
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="form-group">
+                <h6>Sắp xếp theo:</h6>
+                <input type="radio" checked name="sorting" id="all" value="">
+                <label for="all">Tất cả</label>
+                <input type="radio" class="ml-3" name="sorting" id="confirmed" value="Xác nhận">
+                <label for="confirmed">Đã xác nhận</label>
+                <input type="radio" class="ml-3" name="sorting" id="pending" value="Đang chờ xử lý">
+                <label for="pending">Đang chờ xử lý</label>
+                <input type="radio" class="ml-3" name="sorting" id="done" value="Đã thanh lý">
+                <label for="done">Đã thanh lý</label>
+            </div>
+        </div>
+        <div id="order-index">
+            @include('admin.orders.list-order', ['orders' => $orders])
         </div>
     </div>
 </div>
-<!-- Modal -->
-@foreach ($orders as $item)
-<div class="modal fade" id="receipt{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="receiptLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="receiptLabel">Công nợ đơn hàng</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('receipt.debt', ['receipt' => $item->receipt->id]) }}" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label>Tổng tiền đơn hàng</label>
-                        <input type="text" class="form-control total" name="total" value="{{ $item->receipt->total }}">
-                    </div>
-                    <div class="form-group">
-                        <label>Đã trả</label>
-                        <input type="text" class="form-control paid" name="paid" value="{{ $item->receipt->paid }}">
-                    </div>
-                    <div class="form-group">
-                        <label>Còn nợ</label>
-                        <input type="text" class="form-control in_debt" name="in_debt" value="{{ $item->receipt->in_debt }}">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Xác nhận</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-@endforeach
 @endsection
 
 @push('scripts')
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     {!! Toastr::message() !!}   
-    <script>
-        $(document).ready(function () {
-            $('.paid').keyup(function () { 
-                let paid = $(this).val();
-                let total = $('.total').val();    
-                let in_debt = total - paid;
-                $('.in_debt').val(in_debt);
-            });
-        });    
-    </script> 
     @can('order_delete')
         <script>
             $(document).ready(function () {
+
+                $('input:radio[name="sorting"]').change(function (e) { 
+                    e.preventDefault();
+                    let value = $(this).val();
+                    $.ajax({
+                        type: "POST",
+                        url: "/admin/orders/sorting",
+                        data: {
+                            value: value,
+                            _token: $('meta[name="csrf-token"]').attr('content')
+                        },
+                        dataType: "json",
+                        success: function (response) {
+                            $('#order-index').html(response.view);
+                        }
+                    });
+                });
     
                 $("#selectAll").click(function(){
                     $("input[type=checkbox]").prop('checked', $(this).prop('checked'));

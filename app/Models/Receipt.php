@@ -13,7 +13,7 @@ class Receipt extends Model
     protected $table = 'receipts';
 
     protected $fillable = [
-        'total', 'paid', 'in_debt', 'order_id'
+        'total', 'paid', 'in_debt', 'order_id', 'refund'
     ];
 
     /**
