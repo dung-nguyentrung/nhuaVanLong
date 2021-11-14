@@ -38,6 +38,9 @@
                     <td>{{ $item->status }}</td>
                     <td>
                         <div class="d-flex align-items-center list-action">
+                            @if($item->receipt->paid >= $item->receipt->total)
+                                <a href="">Thanh ly</a>
+                            @endif
                             @can('order_show')
                             <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="Xem chi tiết"
                                 data-original-title="View" href="{{ route('orders.show',['order' => $item->id]) }}"><i

@@ -193,4 +193,8 @@ class OrderController extends Controller
         }
         return response()->json(['view' => view('admin.orders.list-order', compact('orders'))->render()]);
     }
+
+    public function liquidation(){
+        return view('admin.orders.liquidation');
+    }
 }
