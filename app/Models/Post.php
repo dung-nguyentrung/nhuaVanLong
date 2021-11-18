@@ -37,15 +37,13 @@ class Post extends Model implements HasMedia
         'created_at', 'updated_at', 'deleted_at'
     ];
 
-    public function setNameViAttribute($name) {
-        $this->attributes['name_vi'] = $name;
+    public function setNameAttribute($name) {
+        $this->attributes['name'] = $name;
         $this->attributes['slug'] = Str::slug($name);
     }
 
     public function scopeSearchByName($query, $keyword) {
-        return $query->where('name_vi', 'LIKE', '%'.$keyword.'%')
-                ->orWhere('name_en', 'LIKE', '%'.$keyword.'%')
-                ->orWhere('name_jp', 'LIKE', '%'.$keyword.'%');
+        return $query->where('name', 'LIKE', '%'.$keyword.'%');
     }
 
     public function scopeSortByCategory($query, $category) {

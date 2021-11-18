@@ -20,13 +20,11 @@
                         @csrf
                         <div class="row">         
                             <div class="col-md-12">
-                                @foreach (config('app.available_locales') as $item)
                                 <div class="form-group">
-                                    <label>Tên chủ đề bài viết ({{ strToUpper($item) }})</label>
-                                    <input type="text" name="name_{{ $item }}" class="form-control" placeholder="Nhập tên chủ đề bài viết {{ $item }}">
+                                    <label>Tên chủ đề bài viết</label>
+                                    <input type="text" name="name" class="form-control" placeholder="Nhập tên chủ đề bài viết ">
                                     <div class="help-block with-errors"></div>
-                                </div>                                                          
-                                @endforeach
+                                </div>           
                             </div>                                 
                         </div>                            
                         <button type="submit" class="btn btn-primary mr-2">Lưu lại</button>

@@ -21,16 +21,11 @@
                         @method('put')
                         <div class="row">         
                             <div class="col-md-12">
-                                @foreach (config('app.available_locales') as $item)
-                                @php
-                                    $name = 'name_'.$item;
-                                @endphp
                                 <div class="form-group">
                                     <label>Tên chủ đề bài viết ({{ strToUpper($item) }})</label>
-                                    <input type="text" value="{{ $tag->$name }}" name="name_{{ $item }}" class="form-control" placeholder="Nhập tên chủ đề bài viết {{ $item }}">
+                                    <input type="text" value="{{ $tag->name }}" name="name" class="form-control" placeholder="Nhập tên chủ đề bài viết {{ $item }}">
                                     <div class="help-block with-errors"></div>
-                                </div>                                                          
-                                @endforeach
+                                </div>        
                             </div>                                 
                         </div>                            
                         <button type="submit" class="btn btn-primary mr-2">Lưu lại</button>

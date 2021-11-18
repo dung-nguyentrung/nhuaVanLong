@@ -50,12 +50,10 @@
                                 <label>Mô tả bài viết</label>
                                 <textarea name="short_description" class="form-control" rows="3"></textarea>
                             </div>
-                            @foreach (config('app.available_locales') as $item)
                             <div class="col-md-12 form-group">
                                 <label>Chi tiết bài viết</label>
                                 <textarea name="description" id="description" class="form-control" rows="12"></textarea>
                             </div>
-                            @endforeach
                         </div>                            
                         <button type="submit" class="btn btn-primary mr-2">Lưu lại</button>
                     </form>

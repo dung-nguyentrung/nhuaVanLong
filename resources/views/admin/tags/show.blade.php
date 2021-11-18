@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', $tag->name_vi)
+@section('title', $tag->name)
 
 @section('content')
 <div class="container-fluid">
@@ -8,7 +8,7 @@
         <div class="col-lg-12">
             <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                 <div>
-                    <h4 class="mb-3">{{ $tag->name_vi }}</h4>
+                    <h4 class="mb-3">{{ $tag->name }}</h4>
                 </div>
                 <div>
                     @can('tag_access')
@@ -27,15 +27,7 @@
                     </tr>
                     <tr>
                         <th>Tên danh mục sản phẩm (VI)</th>
-                        <th>{{ $tag->name_vi }}</th>
-                    </tr>
-                    <tr>
-                        <th>Tên danh mục sản phẩm (EN)</th>
-                        <th>{{ $tag->name_en }}</th>
-                    </tr>
-                    <tr>
-                        <th>Tên danh mục sản phẩm (JP)</th>
-                        <th>{{ $tag->name_jp }}</th>
+                        <th>{{ $tag->name }}</th>
                     </tr>
                 </tbody>
             </table>

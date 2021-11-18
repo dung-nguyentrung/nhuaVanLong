@@ -30,17 +30,7 @@ class StoreTagRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_vi' => [
-                'required',
-                'string',
-                'unique:tags'
-            ],
-            'name_en' => [
-                'required',
-                'string',
-                'unique:tags'
-            ],
-            'name_jp' => [
+            'name' => [
                 'required',
                 'string',
                 'unique:tags'
@@ -51,9 +41,7 @@ class StoreTagRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name_vi' => 'Tên chủ đề bài viết (VI)',
-            'name_en' => 'Tên chủ đề bài viết (EN)',
-            'name_jp' => 'Tên chủ đề bài viết (JP)',
+            'name' => 'Tên chủ đề bài viết',
         ];
     }
 

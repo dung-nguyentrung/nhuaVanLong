@@ -48,6 +48,7 @@ Route::get('orders/district/{id}', [OrderController::class, 'district'])->name('
 Route::get('orders/search', [OrderController::class, 'search'])->name('orders.search');
 Route::patch('orders/confirm/{order}', [OrderController::class, 'confirm'])->name('orders.confirm');
 Route::patch('orders/item/{orderItem}', [OrderController::class, 'updateItem'])->name('orders.item.update');
+Route::get('order/liquidation/{order}', [OrderController::class, 'liquidation'])->name('orders.liquidation');
 Route::resource('orders', OrderController::class)->except(['store', 'create']);
 
 //Receipt

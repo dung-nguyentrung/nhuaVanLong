@@ -36,8 +36,8 @@ class PostController extends Controller
     public function create()
     {
         abort_if(Gate::denies('post_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $postCategories = PostCategory::all()->pluck('name_vi', 'id');
-        $tags = Tag::all()->pluck('name_vi', 'id');
+        $postCategories = PostCategory::all()->pluck('name', 'id');
+        $tags = Tag::all()->pluck('name', 'id');
         
         return view('admin.posts.create', compact('postCategories', 'tags'));
     }
@@ -80,8 +80,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         abort_if(Gate::denies('post_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $postCategories = PostCategory::all()->pluck('name_vi', 'id');
-        $tags = Tag::all()->pluck('name_vi', 'id');
+        $postCategories = PostCategory::all()->pluck('name', 'id');
+        $tags = Tag::all()->pluck('name', 'id');
         
         return view('admin.posts.edit', compact('post', 'postCategories', 'tags'));
     }

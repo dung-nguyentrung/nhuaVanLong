@@ -1,7 +1,4 @@
 @extends('admin.layouts.app')
-@php
-    $name = 'name_'.config('app.locale');
-@endphp
 @push('styles')
 <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 @endpush
@@ -50,7 +47,7 @@
                             </div>
                         </td>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->$name }}</td>
+                        <td>{{ $item->name }}</td>
                         <td>
                             <div class="d-flex align-items-center list-action">
                                 @can('tag_show')

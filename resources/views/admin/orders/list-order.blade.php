@@ -16,6 +16,7 @@
                     <th>Tổng tiền</th>
                     <th>Ngày đặt hàng</th>
                     <th>Trạng thái</th>
+                    <th>Thanh lý hợp đồng</th>
                     <th>Hành động</th>
                 </tr>
             </thead>
@@ -37,10 +38,18 @@
                     <td>{{ $item->created_at->format('d/m/Y') }}</td>
                     <td>{{ $item->status }}</td>
                     <td>
-                        <div class="d-flex align-items-center list-action">
-                            @if($item->receipt->paid >= $item->receipt->total)
-                                <a href="">Thanh ly</a>
-                            @endif
+                        @if($item->receipt->paid >= $item->receipt->total)
+                        <a href="{{ route('orders.liquidation', ['order' => $item->id]) }}" class="btn btn-primary">Thanh lý</a>
+                        @else
+                        @can('order_receipt')
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#receipt{{ $item->id }}">
+                            <i class="fas fa-money-check"></i>
+                        </button>
+                        @endcan
+                        @endif
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center list-action">                            
                             @can('order_show')
                             <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="Xem chi tiết"
                                 data-original-title="View" href="{{ route('orders.show',['order' => $item->id]) }}"><i
@@ -51,13 +60,7 @@
                             <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="Cập nhật"
                                 data-original-title="Edit" href="{{ route('orders.edit',['order' => $item->id]) }}"><i
                                     class="fa fa-pen mr-0"></i></a>
-                            @endcan
-                            @can('order_receipt')
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#receipt{{ $item->id }}">
-                                <i class="fas fa-money-check"></i>
-                            </button>
-                            @endcan
+                            @endcan                            
                             @can('order_delete')
                             <form action="{{ route('orders.destroy',['order' => $item->id]) }}" method="POST">
                                 @csrf

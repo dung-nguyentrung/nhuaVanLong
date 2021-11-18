@@ -31,20 +31,10 @@ class UpdateTagRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_vi' => [
+            'name' => [
                 'required',
                 'string',
-                Rule::unique('tags', 'name_vi')->ignore($this->tag),
-            ],
-            'name_en' => [
-                'required',
-                'string',
-                Rule::unique('tags', 'name_en')->ignore($this->tag),
-            ],
-            'name_jp' => [
-                'required',
-                'string',
-                Rule::unique('tags', 'name_jp')->ignore($this->tag),
+                Rule::unique('tags', 'name')->ignore($this->tag),
             ]
         ];
     }
@@ -52,9 +42,7 @@ class UpdateTagRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name_vi' => 'Tên chủ đề bài viết (VI)',
-            'name_en' => 'Tên chủ đề bài viết (EN)',
-            'name_jp' => 'Tên chủ đề bài viết (JP)',
+            'name' => 'Tên chủ đề bài viết',
         ];
     }
 

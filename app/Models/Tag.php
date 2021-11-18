@@ -33,8 +33,8 @@ class Tag extends Model
         return $this->belongsToMany(Post::class);
     }
 
-    public function setNameViAttribute($name) {
-        $this->attributes['name_vi'] = $name;
+    public function setNameAttribute($name) {
+        $this->attributes['name'] = $name;
         $this->attributes['slug'] = Str::slug($name);
     }
 }

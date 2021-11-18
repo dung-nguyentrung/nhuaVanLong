@@ -32,61 +32,57 @@
         <h4 style="text-align: center;">(Thanh lý hợp đồng ... số ...)</h4>
 
         <p><i>- Căn cứ Bộ luật Dân sự của Quốc Hội nước CHXHCN Việt Nam năm 2015.</i></p>
-        <p><i>- Căn cứ vào Hợp đồng (1) ……………………………………………………….</i></p>
+        <p><i>- Căn cứ vào Hợp đồng ({{ $order->id }}) mua bán hàng hóa công ty TNHH Vân Long.</i></p>
         <p><i>- Căn cứ nhu cầu và khả năng của các Bên;</i></p>
-        <p> Hôm nay, ngày …… tháng …… năm …… , tại ………………………………………………………, chúng tôi gồm : </p>
-        <p>Bên A:<i>Công ty ………………………………………………………</i></p>
+        <p> Hôm nay, ngày {{ date('d') }} tháng {{ date('m') }} năm {{ date('Y') }} , tại thành phố Hải Phòng, chúng tôi gồm : </p>
+        <p>Bên A:<i>Công ty TNHH Vân Long</i></p>
         <p>
-            Địa chỉ trụ sở chính: <i>……………………………………………………</i>
+            Địa chỉ trụ sở chính: <i>Số 15a Dầu Lửa, Hùng Vương, Hồng Bàng, Hải Phòng</i>
         </p>
         <p>
-            Đại diện bởi ông: ..<i>...……………………………………………</i>
+            Đại diện bởi ông: <i>Trần Tuấn Khanh</i>
         </p>
         <p>
-            Chức danh: <i>…………………………………………………</i>
+            Chức danh: <i>Giám đốc công ty</i>
         </p>
         <p>
-            Điện thoại: …………………… Fax: <i>………………………………</i>
+            Điện thoại: +(84) 977.418.888 Fax: <i>(+84) 225.3798.887</i>
         </p>
         <p>
-            MST: <i>…………………………………………………</i>
+            MST: <i>0200367100</i>
         </p>
         <br>
         <br>
-        <p>Bên B:<i>Công ty ………………………………………………………</i></p>
+        <p>Bên B:<i>Công ty {{ $order->company_name }}</i></p>
         <p>
-            Địa chỉ trụ sở chính: <i>……………………………………………………</i>
+            Địa chỉ trụ sở chính: <i>{{ $order->address }}, {{ $order->ward->name }}, {{ $order->district->name }}, {{ $order->province->name }}</i>
         </p>
         <p>
-            Đại diện bởi ông: ..<i>...……………………………………………</i>
+            Đại diện bởi ông: <i>{{ $order->name }}</i>
         </p>
         <p>
-            Chức danh: <i>…………………………………………………</i>
-        </p>
-        <p>
-            Điện thoại: …………………… Fax: <i>………………………………</i>
+            Điện thoại: {{ $order->phone }} 
         </p>
         <p>
             MST: <i>…………………………………………………</i>
         </p>
         <br><br>
-        <p><i>Hai bên thống nhất ký biên bản thanh lý Hợp đồng .................... số: ....../......../....../….. ký
-                ngày ..../...../........ với nội dung sau:</i></p>
+        <p><i>Hai bên thống nhất ký biên bản thanh lý Hợp đồng mua bán số: ....../......../....../….. ký
+                ngày {{ date('d') }}/{{ date('m') }}/{{ date('Y') }} với nội dung sau:</i></p>
         <h2>Điều 1: </h2>
-        <p>Bên B đã tiến hành ............... cho Bên A theo hợp đồng ........... số: ....../......../...... ký ngày
-            ..../...../.......</p>
+        <p>Bên B đã tiến hành thanh toán cho Bên A theo hợp đồng ........... số: ....../......../...... ký ngày
+            {{ date('d') }}/{{ date('m') }}/{{ date('Y') }}</p>
         <h2>Điều 2: Giá trị hợp đồng và phương thức thanh toán:</h2>
         <p>Bên A đồng ý thanh toán cho Bên B mức phí dịch vụ như sau:
         </p>
-        <p>+ Giá trị hợp đồng trước thuế: …….……………………………………………
+        <p>+ Giá trị hợp đồng trước thuế: {{ number_format($order->total - $order->tax) }} đồng
         </p>
-        <p>+ Thuế VAT: ………………………………………………………………</p>
-        <p>+ Giá trị hợp đồng sau thuế: …………………………………………</p>
-        <p>Phương thức thanh toán: ...................</p>
+        <p>+ Thuế VAT: {{ number_format($order->tax) }} đồng</p>
+        <p>+ Giá trị hợp đồng sau thuế: {{ number_format($order->total) }} đồng</p>
         <h2>Điều 3:</h2>
         <p>Bên A đồng ý thanh toán toàn bộ số tiền trên cho Bên B theo như quy định tại Điều 2 của Biên bản này.</p>
         <p>Hai bên thống nhất thanh lý Hợp đồng ............. số: ....../......../....../200. ký ngày
-            ..../...../........ giữa Công ty ............ và Công ty ...........</p>
+            {{ date('d') }}/{{ date('m') }}/{{ date('Y') }} giữa Công ty TNHH Vân Long và Công ty {{ $order->company_name }}p>
         <p><i>Biên bản thanh lý này được lập thành 02 bản mỗi bên giữ 01 (một) bản và có giá trị pháp lý như nhau.</i>
         </p>
 
