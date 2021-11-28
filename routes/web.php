@@ -37,8 +37,10 @@ Route::get('products/category/{category:slug}', [ProductController::class, 'cate
 
 //Cart
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
+Route::post('cart/remove', [CartController::class, 'removeCart']);
 Route::get('wishlist', [CartController::class, 'wishlist'])->name('wishlist');
 Route::post('wishlist', [CartController::class, 'addToWishlist'])->name('wishlist');
+Route::post('wishlist/remove', [CartController::class, 'removeWishlist']);
 Route::post('product/add-to-cart', [CartController::class, 'addToCart'])->name('products.cart');
 Route::post('product/ajax-add-to-cart', [CartController::class, 'addToCartAjax'])->name('products.ajax.cart');
 Route::post('cart/update', [CartController::class, 'updateCart'])->name('cart.update');

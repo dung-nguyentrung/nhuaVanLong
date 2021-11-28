@@ -1,4 +1,17 @@
 @extends('layouts.base')
+@push('styles')
+    <meta property="og:site_name" content="{{ $product->name }}" />
+    <meta property="article:author" content="Công ty TNHH nhựa Vân Long" />
+    <meta property="article:section" content="Bán hàng, sản phẩm nhựa" />
+    <meta property="og:image:type" content="image/png" />
+    <meta name="robots" content="noindex,nofollow">
+    <meta property="og:url" content="http://honghaecocity.online/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{ $product->name }}" />
+    <meta property="og:description"
+        content="{{ $product->short_description }}" />
+    <meta property="og:image" content="{{ $product->getFirstMediaUrl('products') }}" />
+@endpush
 @section('content')
 <!-- Start of Main -->
 <main class="main mb-10 pb-1">
@@ -35,7 +48,8 @@
                     <div class="product product-single row">
                         <div class="col-md-6 mb-6">
                             <div class="product-gallery product-gallery-sticky">
-                                <div class="swiper-container product-single-swiper swiper-theme nav-inner" data-swiper-options="{
+                                <div class="swiper-container product-single-swiper swiper-theme nav-inner"
+                                    data-swiper-options="{
                                     'navigation': {
                                         'nextEl': '.swiper-button-next',
                                         'prevEl': '.swiper-button-prev'
@@ -60,7 +74,9 @@
                                     <div class="product-meta">
                                         <div class="product-categories">
                                             Danh mục:
-                                            <span class="product-category"><a href="{{ route('products.category', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></span>
+                                            <span class="product-category"><a
+                                                    href="{{ route('products.category', ['category' => $product->category->slug]) }}">{{
+                                                    $product->category->name }}</a></span>
                                         </div>
                                         <div class="product-sku">
                                             SKU: <span>{{ $product->slug }}</span>
@@ -94,19 +110,18 @@
                                 <div class="social-links-wrapper">
                                     <div class="social-links">
                                         <div class="social-icons social-no-color border-thin">
-                                            <a href="#" class="social-icon social-facebook"><i class="fab fa-facebook-square"></i></a>
-                                            <a href="#" class="social-icon social-twitter"><i class="fab fa-twitter-square"></i></a>
-                                            <a href="#"
-                                                class="social-icon social-pinterest fab fa-pinterest-p"></a>
-                                            <a href="#" class="social-icon social-whatsapp fab fa-whatsapp"></a>
-                                            <a href="#"
-                                                class="social-icon social-youtube fab fa-linkedin-in"></a>
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}" class="social-icon social-facebook"><i
+                                                    class="fab fa-facebook-square"></i></a>
+                                            <a href="https://twitter.com/intent/tweet?url={{ Request::url() }}" class="social-icon social-twitter"><i
+                                                    class="fab fa-twitter-square"></i></a>
+                                            <a href="https://plus.google.com/share?url{{ Request::url() }}" class="social-icon social-youtube fab fa-google-plus"></a>
                                         </div>
                                     </div>
                                     <span class="divider d-xs-show"></span>
                                     <div class="product-link-wrapper d-flex">
                                         <a href="#" id="wishlist" data-id="{{ $product->id }}"
-                                            class="btn-product-icon btn-wishlist"><span><i class="fa fa-heart"></i></span></a>                                        
+                                            class="btn-product-icon btn-wishlist"><span><i
+                                                    class="fa fa-heart"></i></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +155,8 @@
                                         @if ($product->getFirstMedia('product_drawing'))
                                         <h3 class="mt-3">Bản vẽ kỹ thuật</h3>
                                         <div align="center">
-                                            <img src="{{ $product->getFirstMediaUrl('product_drawing') }}" width="400" height="160" class="mt-5 img-fluid" alt="{{ $product->name }}">
+                                            <img src="{{ $product->getFirstMediaUrl('product_drawing') }}" width="400"
+                                                height="160" class="mt-5 img-fluid" alt="{{ $product->name }}">
                                         </div>
                                         @endif
                                         <h3 class="mt-3">Mô tả sản phẩm</h3>
@@ -175,23 +191,28 @@
                                 <div class="swiper-slide product">
                                     <figure class="product-media">
                                         <a href="product-default.html">
-                                            <img src="{{ $product->getFirstMediaUrl('products', 'thumb') }}" alt="{{ $product->name }}"
-                                                width="300" height="338" />
+                                            <img src="{{ $product->getFirstMediaUrl('products', 'thumb') }}"
+                                                alt="{{ $product->name }}" width="300" height="338" />
                                         </a>
                                         <div class="product-action-vertical">
-                                            <a href="#" id="addToCart" data-id="{{ $product->id }}" class="btn-product-icon btn-cart"
-                                                title="Add to cart"><i class="fa fa-heart"></i></a>
-                                            <a href="#" id="wishlist" data-id="{{ $product->id }}" class="btn-product-icon btn-wishlist"
-                                                title="Add to wishlist"><i class="fa fa-shopping-cart"></i></a>
+                                            <a href="#" id="addToCart" data-id="{{ $product->id }}"
+                                                class="btn-product-icon btn-cart" title="Add to cart"><i
+                                                    class="fa fa-heart"></i></a>
+                                            <a href="#" id="wishlist" data-id="{{ $product->id }}"
+                                                class="btn-product-icon btn-wishlist" title="Add to wishlist"><i
+                                                    class="fa fa-shopping-cart"></i></a>
                                         </div>
                                         <div class="product-action">
-                                            <a href="{{ route('products.detail', ['product' => $product->slug]) }}" class="btn-product btn-quickview" title="Quick View">Chi tiết</a>
+                                            <a href="{{ route('products.detail', ['product' => $product->slug]) }}"
+                                                class="btn-product btn-quickview" title="Quick View">Chi tiết</a>
                                         </div>
                                     </figure>
                                     <div class="product-details">
-                                        <h4 class="product-name"><a href="{{ route('products.detail', ['product' => $product->slug]) }}">{{ $product->name }}</a></h4>
+                                        <h4 class="product-name"><a
+                                                href="{{ route('products.detail', ['product' => $product->slug]) }}">{{
+                                                $product->name }}</a></h4>
                                     </div>
-                                </div>                                    
+                                </div>
                                 @endforeach
                             </div>
                         </div>
@@ -210,7 +231,7 @@
                                 </div>
 
                                 <div class="swiper nav-top">
-                                    <div class="swiper-container swiper-theme nav-top" data-swiper-options = "{
+                                    <div class="swiper-container swiper-theme nav-top" data-swiper-options="{
                                         'slidesPerView': 1,
                                         'spaceBetween': 20,
                                         'navigation': {
@@ -223,18 +244,21 @@
                                             <div class="widget-col swiper-slide">
                                                 <div class="product product-widget">
                                                     <figure class="product-media">
-                                                        <a href="{{ route('products.detail', ['product' => $product->slug]) }}">
-                                                            <img src="{{ $product->getFirstMediaUrl('products') }}" alt="{{ $product->name }}"
-                                                                width="100" height="113" />
+                                                        <a
+                                                            href="{{ route('products.detail', ['product' => $product->slug]) }}">
+                                                            <img src="{{ $product->getFirstMediaUrl('products') }}"
+                                                                alt="{{ $product->name }}" width="100" height="113" />
                                                         </a>
                                                     </figure>
                                                     <div class="product-details">
                                                         <h4 class="product-name">
-                                                            <a href="{{ route('products.detail', ['product' => $product->slug]) }}">{{ $product->name }}</a>
+                                                            <a
+                                                                href="{{ route('products.detail', ['product' => $product->slug]) }}">{{
+                                                                $product->name }}</a>
                                                         </h4>
                                                     </div>
                                                 </div>
-                                            </div>                                                
+                                            </div>
                                             @endforeach
                                         </div>
                                     </div>
@@ -252,8 +276,8 @@
 <!-- End of Main -->
 @endsection
 @push('scripts')
-    <script>
-        $(document).ready(function () {
+<script>
+    $(document).ready(function () {
             $('#wishlist').click(function (e) { 
                 e.preventDefault();
                 let id = $(this).attr('data-id');
@@ -296,5 +320,5 @@
                 });
             });
         });
-    </script>
+</script>
 @endpush

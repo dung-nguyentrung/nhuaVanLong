@@ -58,6 +58,16 @@ class CartController extends Controller
         return response()->json();
     }
 
+    public function removeWishlist(Request $request)
+    {
+        if (!empty($request->rowId))
+            Cart::instance('wishlist')->remove($request->rowId);
+        
+        $wishlists = Cart::instance('wishlist')->content();
+
+        return response()->json(['view' => view('frontend.shop.mini-wishlist', ['wishlists' => $wishlists])->render()]);
+    }
+
     public function addToCartAjax(Request $request) {
         if (!empty($request->id)) {
             $product = Product::findOrFail($request->id);
@@ -69,9 +79,12 @@ class CartController extends Controller
 
     public function removeCart(Request $request) {
         if (!empty($request->rowId))
-            Cart::remove($request->rowId);
+            Cart::instance('cart')->remove($request->rowId);
 
-        return response()->json();
+        $carts = Cart::instance('cart')->content();
+        $subtotal = Cart::instance('cart')->subtotal();
+
+        return response()->json(['view' => view('frontend.shop.list-cart', ['carts' => $carts])->render(), 'subtotal' => $subtotal]);
     }
 
     public function destroyCart() {

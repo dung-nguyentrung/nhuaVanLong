@@ -7,9 +7,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Nhựa Vân Long</title>
 
-    <meta name="keywords" content="Marketplace ecommerce responsive HTML5 Template" />
-    <meta name="description" content="Wolmart is powerful marketplace &amp; ecommerce responsive Html5 Template.">
+    <meta name="keywords" content="Công ty TNHH Vân Long" />
+    <meta name="description" content="Công ty TNHH Vân Long được thành lập năm 1999, là doanh nghiệp 100% vốn Việt Nam, chuyên gia công và sản xuất các sản phẩm từ nhựa.">
     <meta name="author" content="D-THEMES">
+    @stack('styles')
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{asset('assets/images/logo.png')}}">
@@ -62,24 +63,24 @@
                     </div>
                     <div class="header-right">
                         <div class="dropdown">
-                            <a href="about-us.html#currency">USD</a>
+                            <a href="#currency">USD</a>
                             <div class="dropdown-box">
-                                <a href="about-us.html#USD">USD</a>
-                                <a href="about-us.html#EUR">EUR</a>
+                                <a href="#USD">USD</a>
+                                <a href="#EUR">EUR</a>
                             </div>
                         </div>
                         <!-- End of DropDown Menu -->
 
                         <div class="dropdown">
-                            <a href="about-us.html#language"><img src="{{ asset('assets/images/flags/eng.png') }}" alt="ENG Flag" width="14"
+                            <a href="#language"><img src="{{ asset('assets/images/flags/eng.png') }}" alt="ENG Flag" width="14"
                                     height="8" class="dropdown-image" /> ENG</a>
                             <div class="dropdown-box">
-                                <a href="about-us.html#ENG">
+                                <a href="#ENG">
                                     <img src="{{ asset('assets/images/flags/eng.png') }}" alt="ENG Flag" width="14" height="8"
                                         class="dropdown-image" />
                                     ENG
                                 </a>
-                                <a href="about-us.html#FRA">
+                                <a href="#FRA">
                                     <img src="{{ asset('assets/images/flags/fra.png') }}" alt="FRA Flag" width="14" height="8"
                                         class="dropdown-image" />
                                     FRA
@@ -141,7 +142,7 @@
                     <div class="inner-wrap">
                         <div class="header-left">
                             <div class="dropdown category-dropdown has-border" data-visible="true">
-                                <a href="about-us.html#" class="category-toggle" role="button" data-toggle="dropdown"
+                                <a href="/shop" class="category-toggle" role="button" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="true" data-display="static"
                                     title="Browse Categories">
                                     <i class="fa fa-list-ul"></i>

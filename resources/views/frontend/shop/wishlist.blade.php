@@ -26,32 +26,8 @@
                                 <th class="product-subtotal"><span>Thêm vào giỏ hàng</span></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach (Cart::instance('wishlist')->content() as $item)
-                            <tr>
-                                <td class="product-thumbnail">
-                                    <div class="p-relative">
-                                        <a href="product-default.html">
-                                            <figure>
-                                                <img src="{{ $item->model->getFirstMediaUrl('products') }}" alt="{{ $item->name }}"
-                                                    width="300" height="338">
-                                            </figure>
-                                        </a>
-                                        <button type="submit" class="btn btn-close"><i
-                                                class="fas fa-times"></i></button>
-                                    </div>
-                                </td>
-                                <td class="product-name">
-                                    <a href="{{ route('products.detail', ['product' => $item->model->slug]) }}">
-                                        {{ $item->model->name }}
-                                    </a>
-                                </td>
-                                <td class="product-price"><span class="amount">{{ $item->model->price }}</span></td>
-                                <td class="product-subtotal">
-                                    <a href="#" data-id="{{ $item->model->id }}" class="addToCart btn btn-dark ">Thêm giỏ hàng</a>
-                                </td>
-                            </tr>                                
-                            @endforeach
+                        <tbody id="wishlist-item">
+                            @include('frontend.shop.mini-wishlist', ['wishlists' => Cart::instance('wishlist')->content()])
                         </tbody>
                     </table>
 
@@ -135,6 +111,23 @@
                     },
                     error: function (error) { 
                         toastr.error(error.response.error, 'Lỗi');
+                    }
+                });
+            });
+            $(document).on('click', '.remove-wishlist', function (e) {
+                e.preventDefault();
+                let rowId = $(this).attr('data-id');
+
+                $.ajax({
+                    type: "POST",
+                    url: "/wishlist/remove",
+                    data: {
+                        rowId: rowId,
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        $('#wishlist-item').html(response.view);
                     }
                 });
             });

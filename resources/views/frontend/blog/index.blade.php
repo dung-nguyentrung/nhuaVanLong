@@ -12,7 +12,7 @@
                     @foreach ($posts as $post)
                     <article class="post post-list post-listing mb-md-10 mb-6 pb-2 overlay-zoom mb-4">
                         <figure class="post-media br-sm">
-                            <a href="post-single.html">
+                            <a href="{{ route('posts.category',['postCategory' => $post->postCategory->name ]) }}">
                                 <img src="{{ $post->getFirstMediaUrl('posts', 'thumb') }}" width="930"
                                     height="500" alt="{{ $post->name }}">
                             </a>

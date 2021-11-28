@@ -116,13 +116,13 @@
                                 <a href="tel:{{ $setting->phone ?? '' }}" class="phone-number font-weight-bolder ls-50">{{ $setting->phone ?? '' }}</a>
                             </div>
                         </div>
-                        <a class="wishlist label-down link d-xs-show" href="wishlist.html">
+                        <a class="wishlist label-down link d-xs-show" href="/wishlist">
                             <i class="fa fa-heart"></i>
                             <span class="wishlist-label d-lg-show">Yêu thích</span>
                         </a>
                         <div class="dropdown cart-dropdown mr-0 mr-lg-2">
                             <div class="cart-overlay"></div>
-                            <a href="demo2.html#" class="cart-toggle label-down link">
+                            <a href="/cart" class="cart-toggle label-down link">
                                 <i class="fa fa-shopping-cart">
                                 </i>
                                 <span class="cart-label">Giỏ hàng</span>
@@ -154,7 +154,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-sm-6">
                             <div class="widget widget-about">
-                                <a href="demo2.html" class="logo-footer">
+                                <a href="/" class="logo-footer">
                                     <img src="{{ asset('assets/images/demos/demo2/logo.png') }}" alt="logo-footer" width="104"
                                         height="45" />
                                 </a>

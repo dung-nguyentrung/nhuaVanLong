@@ -1,4 +1,16 @@
 @extends('layouts.base')
+@push('styles')
+<meta property="og:site_name" content="{{ $post->name }}" />
+<meta property="article:author" content="Công ty TNHH nhựa Vân Long" />
+<meta property="article:section" content="Bán hàng, sản phẩm nhựa" />
+<meta property="og:image:type" content="image/png" />
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:url" content="http://honghaecocity.online/" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="{{ $post->name }}" />
+<meta property="og:description" content="{{ $post->short_description }}" />
+<meta property="og:image" content="{{ $post->getFirstMediaUrl('posts') }}" />
+@endpush
 @section('content')
 <!-- Start of Main -->
 <main class="main">
@@ -34,21 +46,12 @@
                     <!-- End Tag -->
                     <div class="social-links mb-10">
                         <div class="social-icons social-no-color border-thin">
-                            <a href="" class="social-icon social-facebook">
-                                <i class="fab fa-facebook-square"></i>
-                            </a>
-                            <a href="" class="social-icon social-twitter">
-                                <i class="fab fa-twitter-square"></i>
-                            </a>
-                            <a href="" class="social-icon social-pinterest">
-                                <i class="fab fa-pinterest"></i>
-                            </a>
-                            <a href="" class="social-icon social-instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="" class="social-icon social-youtube">
-                                <i class="fab fa-youtube-square"></i>
-                            </a>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}" class="social-icon social-facebook"><i
+                                    class="fab fa-facebook-square"></i></a>
+                            <a href="https://twitter.com/intent/tweet?url={{ Request::url() }}" class="social-icon social-twitter"><i
+                                    class="fab fa-twitter-square"></i></a>
+                            <a href="https://plus.google.com/share?url{{ Request::url() }}"
+                                class="social-icon social-youtube fab fa-google-plus"></a>
                         </div>
                     </div>
                     <!-- End Post Navigation -->
@@ -93,73 +96,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- End Related Posts -->
-                    
-                    {{-- <h4 class="title title-lg font-weight-bold pt-1 mt-10">3 Comments</h4>
-                    <ul class="comments list-style-none pl-0">
-                        <li class="comment">
-                            <div class="comment-body">
-                                <figure class="comment-avatar">
-                                    <img src="assets/images/blog/single/1.png" alt="Avatar" width="90" height="90" />
-                                </figure>
-                                <div class="comment-content">
-                                    <h4 class="comment-author font-weight-bold">
-                                        <a href="post-single.html#">John Doe</a>
-                                        <span class="comment-date">Aug 23, 2021 at 10:46 am</span>
-                                    </h4>
-                                    <p>Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl.arcu fer
-                                        ment umet, dapibus sed, urna.</p>
-                                    <a href="post-single.html#" class="btn btn-dark btn-link btn-underline btn-icon-right btn-reply">Reply<i class="w-icon-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="comment">
-                            <div class="comment-body">
-                                <figure class="comment-avatar">
-                                    <img src="assets/images/blog/single/2.png" alt="Avatar" width="90" height="90" />
-                                </figure>
-                                <div class="comment-content">
-                                    <h4 class="comment-author font-weight-bold">
-                                        <a href="post-single.html#">Semi Colon</a>
-                                        <span class="comment-date">Aug 24, 2021 at 13:25 am</span>
-                                    </h4>
-                                    <p>Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales.</p>
-                                    <a href="post-single.html#" class="btn btn-dark btn-link btn-underline btn-icon-right btn-reply">Reply<i class="w-icon-long-arrow-right"></i></a>
-                                </div>  
-                            </div>
-                        </li>
-                        <li class="comment">
-                            <div class="comment-body">
-                                <figure class="comment-avatar">
-                                    <img src="assets/images/blog/single/1.png" alt="Avatar" width="90" height="90" />
-                                </figure>
-                                <div class="comment-content">
-                                    <h4 class="comment-author font-weight-bold">
-                                        <a href="post-single.html#">John Doe</a>
-                                        <span class="comment-date">Aug 23, 2021 at 10:46 am</span>
-                                    </h4>
-                                    <p>Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl.arcu fer
-                                        ment umet, dapibus sed, urna.</p>
-                                    <a href="post-single.html#" class="btn btn-dark btn-link btn-underline btn-icon-right btn-reply">Reply<i class="w-icon-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <!-- End Comments -->
-                    <form class="reply-section pb-4">
-                        <h4 class="title title-md font-weight-bold pt-1 mt-10 mb-0">Leave a Reply</h4>
-                        <p>Your email address will not be published. Required fields are marked</p>
-                        <div class="row">
-                            <div class="col-sm-6 mb-4">
-                                <input type="text" class="form-control" placeholder="Enter Your Name" id="name">
-                            </div>
-                            <div class="col-sm-6 mb-4">
-                                <input type="text" class="form-control" placeholder="Enter Your Email" id="email_1">
-                            </div>
-                        </div>
-                        <textarea cols="30" rows="6" placeholder="Write a Comment" class="form-control mb-4" id="comment"></textarea>
-                        <button class="btn btn-dark btn-rounded btn-icon-right btn-comment">Post Comment<i class="w-icon-long-arrow-right"></i></button>
-                    </form> --}}
                 </div>
                 <!-- End of Main Content -->
                 <x-blog-sliderbar></x-blog-sliderbar>

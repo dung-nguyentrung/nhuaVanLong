@@ -178,7 +178,7 @@
                 @foreach ($posts as $post)
                 <div class="swiper-slide post">
                     <figure class="post-media br-sm">
-                        <a href="post-single.html">
+                        <a href="{{ route('posts.detail', ['post' => $post->slug]) }}">
                             <img src="{{ $post->getFirstMediaUrl('posts') }}" alt="{{ $post->title }}" width="620" height="398"
                                 style="background-color: #898078;">
                         </a>
