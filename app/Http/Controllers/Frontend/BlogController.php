@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     public function index () {
-        $posts = Post::with('postCategory', 'media', 'creator')->paginate(6);        
+        $posts = Post::with('postCategory', 'media', 'creator')->latest('id')->paginate(6);        
 
         return view('frontend.blog.index', compact('posts'));
     }

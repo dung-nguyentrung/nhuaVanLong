@@ -1,4 +1,5 @@
 @extends('layouts.base')
+@section('title', 'Tin tức && Sự kiện')
 @section('content')
 <!-- Start of Main -->
 <main class="main">
@@ -12,14 +13,14 @@
                     @foreach ($posts as $post)
                     <article class="post post-list post-listing mb-md-10 mb-6 pb-2 overlay-zoom mb-4">
                         <figure class="post-media br-sm">
-                            <a href="{{ route('posts.category',['postCategory' => $post->postCategory->name ]) }}">
+                            <a href="{{ route('posts.detail',['post' => $post->slug ]) }}">
                                 <img src="{{ $post->getFirstMediaUrl('posts', 'thumb') }}" width="930"
                                     height="500" alt="{{ $post->name }}">
                             </a>
                         </figure>
                         <div class="post-details">
                             <div class="post-cats text-primary">
-                                <a href="{{ route('posts.category',['postCategory' => $post->postCategory->name ]) }}">{{ $post->postCategory->name }}</a>
+                                <a href="{{ route('posts.category',['postCategory' => $post->postCategory->slug ]) }}">{{ $post->postCategory->name }}</a>
                             </div>
                             <h4 class="post-title">
                                 <a href="{{ route('posts.detail', ['post' => $post->slug]) }}">{{ $post->name }}</a>

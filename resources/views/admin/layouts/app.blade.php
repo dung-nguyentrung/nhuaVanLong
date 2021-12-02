@@ -85,6 +85,12 @@
                                 @endcan
                             </ul>
                         </li>
+                        <li class="">
+                            <a href="{{ route('customer') }}">
+                                <img src="{{ asset('admin/assets/images/icons/testimonial.svg') }}" class="icon-left-bar" alt="Testimonial">
+                                <span class="ml-4">Khách hàng liên hệ </span>
+                            </a>
+                        </li>
                         @can('category_access')
                         <li class="">
                             <a href="{{ route('categories.index') }}">

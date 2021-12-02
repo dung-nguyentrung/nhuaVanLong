@@ -1,4 +1,5 @@
 @extends('layouts.base')
+@section('title', 'Sản phẩm')
 @section('content')
 <!-- Start of Main -->
 <main class="main">

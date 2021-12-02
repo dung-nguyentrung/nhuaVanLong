@@ -1,4 +1,5 @@
 @extends('layouts.base')
+@section('title', $post->name)
 @push('styles')
 <meta property="og:site_name" content="{{ $post->name }}" />
 <meta property="article:author" content="Công ty TNHH nhựa Vân Long" />

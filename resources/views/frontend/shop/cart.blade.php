@@ -1,5 +1,5 @@
 @extends('layouts.base')
-
+@section('title', 'Giỏ hàng')
 @section('content')
 <!-- Start of Main -->
 <main class="main cart">

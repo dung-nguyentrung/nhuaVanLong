@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\{
 };
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/customer', [DashboardController::class, 'customer'])->name('customer');
 
 //Permissions
 Route::delete('permissions/massDestroy', [PermissionController::class, 'massDestroy']);

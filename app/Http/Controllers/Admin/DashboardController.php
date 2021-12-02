@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -57,5 +58,11 @@ class DashboardController extends Controller
         ->get();
 
         return $products;
+    }
+
+    public function customer()
+    {
+        $customers = Contact::all();
+        return view('admin.customer', compact('customers'));
     }
 }

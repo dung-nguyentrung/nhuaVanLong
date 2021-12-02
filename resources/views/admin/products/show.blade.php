@@ -69,7 +69,6 @@
                             <th>Chi tiết sản phẩm</th>
                             <th>{!! $product->description !!}</th>
                         </tr>
-                    @endforeach
                 </tbody>
             </table>
         </div>

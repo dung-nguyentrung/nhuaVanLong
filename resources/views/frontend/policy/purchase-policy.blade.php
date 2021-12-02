@@ -1,5 +1,5 @@
 @extends('layouts.base')
-
+@section('title', 'Điều khoản mua hàng')
 @section('content')
 <main class="main cart">
     <!-- Start of Breadcrumb -->

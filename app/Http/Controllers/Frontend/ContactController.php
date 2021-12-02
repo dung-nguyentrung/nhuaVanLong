@@ -20,7 +20,7 @@ class ContactController extends Controller
         $contact = Contact::create($request->validated());
         
         if ($request->input('email', true)) {
-            event(new NewClpientContacted($contact));
+            event(new NewClientContacted($contact));
         }
         
         Toastr::success('Chúng tôi đã nhận được yêu cầu từ quý khách', 'Xin cảm ơn');

@@ -2,14 +2,14 @@
 @push('styles')
 <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 @endpush
-@section('title', 'Danh mục sản phẩm')
+@section('title', 'Danh mục đơn hàng')
 @section('content')
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
             <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                 <div>
-                    <h4 class="mb-3">Danh sách danh mục sản phẩm</h4>
+                    <h4 class="mb-3">Danh sách đơn hàng</h4>
                 </div>
                 <div>
                     @can('order_delete')                        

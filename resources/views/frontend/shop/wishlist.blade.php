@@ -1,4 +1,5 @@
 @extends('layouts.base')
+@section('title', 'Sản phẩm yêu thích')
 @section('content')
 <!-- Start of Main -->
 <main class="main cart">
