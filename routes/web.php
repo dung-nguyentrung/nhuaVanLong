@@ -47,7 +47,7 @@ Route::post('cart/update', [CartController::class, 'updateCart'])->name('cart.up
 Route::post('cart/destroy', [CartController::class, 'destroyCart'])->name('cart.destroy');
 
 //Checkout
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::post('order-products', [CartController::class, 'order'])->name('order.confirm');
 });
@@ -66,7 +66,7 @@ Route::get('contact-us', [ContactController::class, 'index'])->name('contact');
 Route::post('contact-us', [ContactController::class, 'store'])->name('contact');
 
 //User
-Route::prefix('user')->middleware(['auth'])->group(function () {
+Route::prefix('user')->middleware(['auth', 'verified'])->group(function () {
     
     Route::get('dashboard', [UserController::class, 'index'])->name('user.dashboard');
     Route::patch('update/{user}', [UserController::class, 'update'])->name('user.update');
@@ -77,4 +77,4 @@ Route::prefix('user')->middleware(['auth'])->group(function () {
 });
 
 //Authentication 
-Auth::routes();
+Auth::routes(['verify' => true]);

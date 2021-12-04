@@ -1,5 +1,5 @@
 @extends('layouts.base')
-
+@section('title', 'Đăng ký')
 @section('content')
 <!-- Start of Main -->
 <main class="main login-page">

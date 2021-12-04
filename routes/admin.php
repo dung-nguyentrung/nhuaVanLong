@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
-    CategoryController, DashboardController,
+    CategoryController, CustomerController, DashboardController,
     OrderController,
     PermissionController, PostCategoryController,
     PostController, ProductController,
@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\{
 };
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/customer', [DashboardController::class, 'customer'])->name('customer');
+Route::get('/contact', [DashboardController::class, 'contact'])->name('contact');
 
 //Permissions
 Route::delete('permissions/massDestroy', [PermissionController::class, 'massDestroy']);
@@ -82,3 +82,7 @@ Route::resource('settings', SettingController::class)->only(['index', 'store']);
 //Testimonials 
 Route::delete('testimonials/massDestroy', [TestimonialController::class, 'massDestroy']);
 Route::resource('testimonials', TestimonialController::class);
+
+//Customers 
+Route::delete('customers/massDestroy', [CustomerController::class, 'massDestroy']);
+Route::resource('customers', CustomerController::class);

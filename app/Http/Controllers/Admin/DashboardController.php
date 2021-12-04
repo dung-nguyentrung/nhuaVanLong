@@ -60,9 +60,9 @@ class DashboardController extends Controller
         return $products;
     }
 
-    public function customer()
+    public function contact()
     {
-        $customers = Contact::all();
-        return view('admin.customer', compact('customers'));
+        $contacts = Contact::all();
+        return view('admin.contact', compact('contacts'));
     }
 }

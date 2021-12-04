@@ -21,6 +21,7 @@
         <form action="{{ route('cart.update') }}" method="post">
             @csrf
             <div class="form-group">
+                <input type="hidden" name="id" value="{{ $item->model->id }}">
                 <input class="form-control" name="quantity" width="3" type="number" value="{{ $item->qty }}" min="1"
                     max="100000">
                 <input type="hidden" name="rowId" value="{{ $item->rowId }}">

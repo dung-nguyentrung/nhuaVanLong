@@ -29,7 +29,7 @@
                                 <div class="form-group">
                                     <label>Họ và tên (<span style="color: red">*</span>)</label>
                                     <input type="text" class="form-control form-control-md" name="name"
-                                        required placeholder="Nguyễn Văn A">
+                                        required placeholder="Nguyễn Văn A" value="{{ Auth::user()->name }}">
                                 </div>
                             </div>
                         </div>
@@ -67,11 +67,11 @@
                         <div class="form-group">
                             <label>Địa chỉ cụ thể (<span style="color: red">*</span>)</label>
                             <input type="text"
-                                class="form-control form-control-md mb-2" name="address" placeholder="Số 4, Lý Tự Trọng" required>
+                                class="form-control form-control-md mb-2" value="{{ Auth::user()->address }}" name="address" placeholder="Số 4, Lý Tự Trọng" required>
                         </div>
                         <div class="form-group mb-7">
                             <label>Địa chỉ email (<span style="color: red">*</span>)</label>
-                            <input type="email" class="form-control form-control-md" placeholder="khachhang@vanlongplastic.com.vn" name="email" required>
+                            <input type="email" value="{{ Auth::user()->email }}" class="form-control form-control-md" placeholder="khachhang@vanlongplastic.com.vn" name="email" required>
                             <input type="hidden" name="tax" value="{{ Cart::tax(0,'','') }}">
                             <input type="hidden" name="shipping" value="0">
                             <input type="hidden" name="subtotal" value="{{ Cart::subtotal(0,'','') }}">
@@ -79,7 +79,7 @@
                         </div>
                         <div class="form-group mb-7">
                             <label>Điện thoại (<span style="color: red">*</span>)</label>
-                            <input type="text" class="form-control form-control-md" placeholder="0123456789" name="phone" required>
+                            <input type="text" value="{{ Auth::user()->phone }}" class="form-control form-control-md" placeholder="0123456789" name="phone" required>
                         </div>
                         <div class="form-group mt-3">
                             <label for="order-notes">Ghi chú</label>

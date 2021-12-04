@@ -86,11 +86,19 @@
                             </ul>
                         </li>
                         <li class="">
-                            <a href="{{ route('customer') }}">
-                                <img src="{{ asset('admin/assets/images/icons/testimonial.svg') }}" class="icon-left-bar" alt="Testimonial">
-                                <span class="ml-4">Khách hàng liên hệ </span>
+                            <a href="{{ route('contact') }}">
+                                <img src="{{ asset('admin/assets/images/icons/contact.png') }}" class="icon-left-bar" alt="Testimonial">
+                                <span class="ml-4">Liên hệ </span>
                             </a>
                         </li>
+                        @can('customer_access')
+                        <li class="">
+                            <a href="{{ route('customers.index') }}">
+                                <img src="{{ asset('admin/assets/images/icons/customer.png') }}" class="icon-left-bar" alt="Testimonial">
+                                <span class="ml-4">Khách hàng </span>
+                            </a>
+                        </li>                            
+                        @endcan
                         @can('category_access')
                         <li class="">
                             <a href="{{ route('categories.index') }}">

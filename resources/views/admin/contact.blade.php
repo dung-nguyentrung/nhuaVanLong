@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Khách hàng liên hệ')
+@section('title', 'Liên hệ')
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -30,7 +30,7 @@
                         </tr>
                     </thead>
                     <tbody class="ligth-body">
-                        @foreach ($customers as $item)
+                        @foreach ($contacts as $item)
                         <tr>
                             <td>
                                 <div class="checkbox d-inline-block">

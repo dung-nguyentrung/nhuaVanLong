@@ -94,9 +94,13 @@ class CartController extends Controller
     }
 
     public function updateCart(Request $request) {
+        $product = Product::findOrFail($request->id);
         if ($request->quantity > 0) {
             Cart::instance('cart')->update($request->rowId, $request->quantity);
-            Toastr::success('Cập nhật giỏ hàng thành công !', 'Thông báo');
+            if ($product->quantity > $request->quantity)
+                Toastr::success('Cập nhật giỏ hàng thành công !', 'Thông báo');
+            else
+                Toastr::warning('Sản phẩm trong kho chỉ còn '.$product->quantity.', chúng tôi sẽ liên lạc sau khi bạn đặt hàng !', 'Thông báo');
         }
         else
             Toastr::erorr('Số lượng sản phẩm không hợp lệ !', 'Thông báo');

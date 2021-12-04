@@ -82,6 +82,10 @@
                                         <div class="product-sku">
                                             SKU: <span>{{ $product->slug }}</span>
                                         </div>
+                                        <ul class="list-group-item">
+                                            <li class="font-size-sm">Tình trạng: {{ $product->quantity == 0 ? 'Hết hàng' : 'Còn hàng' }}</li>
+                                            <li class="font-size-sm font-weight-bold">Số lượng: {{ $product->quantity }} sản phẩm</li>
+                                        </ul>
                                     </div>
                                 </div>
 
