@@ -76,11 +76,22 @@
                 </tbody>
             </table>
             <p>Trạng thái: <span class="text-primary">{{ $order->status }}</span></p>
-            <form action="{{ route('orders.confirm', ['order' => $order->id]) }}" method="post">
-                @csrf
-                @method('patch')
-                <button type="submit" class="btn btn-primary">Xác nhận đơn hàng</button>
-            </form>
+            <div class="row">
+                <div class="col-lg-2">
+                    <form action="{{ route('orders.confirm', ['order' => $order->id]) }}" method="post">
+                        @csrf
+                        @method('patch')
+                        <button type="submit" class="btn btn-primary">Xác nhận đơn hàng</button>
+                    </form>
+                </div>
+                <div class="col-lg-2 offset-8">                    
+                    <form action="{{ route('orders.cancel', ['order' => $order->id]) }}" method="post">
+                        @csrf
+                        @method('patch')
+                        <button type="submit" class="btn btn-danger">Hủy đơn hàng</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

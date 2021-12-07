@@ -21,6 +21,7 @@ class Order extends Model
     const PENDING = "Đang chờ xử lý";
     const CONFIRMED = "Xác nhận";
     const LIQUIDATION = "Đã xử lý";
+    const CANCELED = 'Đã hủy';
 
     protected $table = 'orders';
 

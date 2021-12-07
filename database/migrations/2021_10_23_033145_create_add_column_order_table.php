@@ -16,7 +16,7 @@ class CreateAddColumnOrderTable extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->string('company_name');
             $table->string('email')->nullable();
-            $table->enum('status',['Đang chờ xử lý', 'Xác nhận', 'Đã thanh lý'])->default('Đang chờ xử lý');
+            $table->enum('status',['Đang chờ xử lý', 'Xác nhận', 'Đã thanh lý', 'Đã hủy'])->default('Đang chờ xử lý');
             $table->text('note')->nullable();
             $table->enum('shipping_method', ['Công ty giao hàng', 'Khách nhận hàng trực tiếp']);
         });

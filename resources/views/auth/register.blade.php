@@ -57,12 +57,6 @@
                             </form>
                         </div>
                     </div>
-                    <p class="text-center">Đăng nhập với</p>
-                    <div class="social-icons social-icon-border-color d-flex justify-content-center">
-                        <a href="login.html#" class="social-icon social-facebook"><i class="fab fa-facebook-square"></i></a>
-                        <a href="login.html#" class="social-icon social-twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="login.html#" class="social-icon social-google fab fa-google"></a>
-                    </div>
                 </div>
             </div>
         </div>

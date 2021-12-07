@@ -136,9 +136,7 @@ class OrderController extends Controller
         return back();
     }
 
-    public function confirm(Order $order) {
-        $order->update(['status' => Order::CONFIRMED]);
-
+    public function confirm(Order $order) {        
         $items = OrderItem::where('order_id', $order->id)->get();
         foreach ($items as $item) {
             $product = Product::where('id', $item->product_id)->first();
@@ -151,8 +149,16 @@ class OrderController extends Controller
                 return back();
             }
         }
-
+        
+        $order->update(['status' => Order::CONFIRMED]);
         Toastr::success('Xác nhận đơn hàng thành công !', 'Thông báo');
+        return back();
+    }
+
+    public function cancel(Order $order)
+    {
+        $order->update(['status' => Order::CANCELED]);
+        Toastr::success('Hủy đơn hàng thành công !', 'Thông báo');
         return back();
     }
 
